@@ -5,10 +5,6 @@ import './App.css';
 import { Card, Icon, Modal, Divider} from 'antd';
 import Nav from './Nav'
 
-import apikey from './apikey';
-import { Redirect } from 'react-router-dom';
-
-
 
 function mapStateToProps(state){
   if(state.user.token !== "vide"){
@@ -46,14 +42,14 @@ function ScreenArticlesBySource(props) {
 
   useEffect(() => {
     const findArticles = async() => {
-      var apiKey = apikey;
 
       try {
-        const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
-        const body = await data.json()
+        // const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
+        // const body = await data.json()
+
         // console.log ('findArticles from API');
         // console.log('body=', body)
-        setArticleList(body.articles) 
+        // setArticleList(body.articles) 
         
       } catch (error) {
         console.log (error);

@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import './App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from './Nav'
 import { connect } from 'react-redux';
 
-import apikey from './apikey';
+
 
 function mapStateToProps(state){
   if(state.user.token !== "vide"){
@@ -43,12 +43,25 @@ function ScreenSource(props) {
   }, [lang, country, category]);
   
   async function chargeNews(lang, country, category){
-    var apiKey = apikey;
-
+    console.log('ScreenSource.chargeNews()');
     try {
-      const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
+
+      var urlAPI = JSON.stringify({
+        url : `https://newsapi.org/v2/sources?`,
+        lang,
+        country,
+        category
+      })
+      var requet = {
+        method : 'POST', 
+        headers: {'Content-Type':'application/x-www-form-urlencoded'},
+        body : urlAPI
+      };
+      const data = await fetch(`/getArticles`, requet)
+
+      // const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`);
       const body = await data.json();
-      // console.log(body.sources);
+      console.log(body.sources);
       setSourceList(body.sources);
       
     } catch (error) {

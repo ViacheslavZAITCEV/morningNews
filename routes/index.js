@@ -5,6 +5,7 @@ var SHA256 = require('crypto-js/sha256');
 var encBase64 = require('crypto-js/enc-base64');
 var users = require('../models/users');
 
+const apikey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -156,6 +157,27 @@ router.post('/delArticle', async function(req, res, next){
     reponse = await delArticleToBD(req.body.token, req.body.urlToImage);
     console.log ('del article from BD. reponseBD=', reponse);
   }
+  res.json(reponse)
+})
+
+
+
+
+router.post('/getArticles', async function(req, res, next){
+  console.log('route: fetch,  req.body=', req.body);
+  var urlBrut = req.body;
+  var url = JSON.parse(urlBrut);
+  console.log('route: fetch,  url=', url);
+  var reponse= {status : false};
+  try {
+    reponse.reponse = await fetch(`${url.url}${url.lang}${url.country}${url.category}${apikey}`);
+
+    reponse.status = true;
+  } catch (error) {
+    console.log(error);
+    reponse.error = error; 
+  }
+  console.log ('fetch. reponseBD=', reponse);
   res.json(reponse)
 })
 
