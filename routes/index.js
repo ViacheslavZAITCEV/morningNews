@@ -11,6 +11,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+
+
 // ******************************
 //route: user cherche son account
 router.post('/signin', async function(req, res, next) {
@@ -44,6 +47,7 @@ router.post('/signin', async function(req, res, next) {
   // var toReact = est reponse pour ReactApp
   res.json(toReact);
 });
+
 
 
 
@@ -83,12 +87,16 @@ router.post('/signup', async function(req, res, next) {
 });
 
 
+
+
 router.post('/setLang', async function( req, res, next){
   console.log('route: /setLang, req.body.language=', req.body.language, ', token=', req.body.token)
   var reponse = await setLang(req.body.token, 'language='+ req.body.language+'&');
   console.log (reponse);
   res.json(reponse)
 });
+
+
 
 
 router.post('/setCountry', async function( req, res, next){
@@ -99,12 +107,16 @@ router.post('/setCountry', async function( req, res, next){
 });
 
 
+
+
 router.post('/setCategory', async function( req, res, next){
   console.log('route: /setCategory, req.body.category=', req.body.category, ', token=', req.body.token)
   var reponse = await setCategory(req.body.token, 'category='+ req.body.category+'&');
   console.log (reponse);
   res.json(reponse)
 });
+
+
 
 
 router.post('/addArticle', async function(req, res, next){
@@ -116,6 +128,8 @@ router.post('/addArticle', async function(req, res, next){
 })
 
 
+
+
 router.post('/delArticle', async function(req, res, next){
   // body : `token=${token}&title=${article.title}&description${article.description}&image=${article.urlToImage}&content=${article.content}`
   console.log('route: delArticle,  req.body=', req.body);
@@ -123,6 +137,11 @@ router.post('/delArticle', async function(req, res, next){
   console.log ('del article from BD. reponseBD=', reponse);
   res.json(reponse)
 })
+
+
+
+
+
 
 
 
@@ -138,6 +157,8 @@ async function isExistUser(email){
   reponse = users.find({email});
   return reponse;
 }
+
+
 
 async function createUser(email, pass){
   var reponse;
@@ -156,6 +177,8 @@ async function createUser(email, pass){
   return reponse;
 }
 
+
+
 async function setLang(token, lang){
   console.log('function setLang, lang = ', lang)
   console.log('function setLang, token = ', token)
@@ -163,10 +186,13 @@ async function setLang(token, lang){
   return reponse;
 }
 
+
+
 async function setCountry(token, country){
   var reponse = await users.update({token}, {country});
   return reponse;
 }
+
 
 
 const temp = {
@@ -174,11 +200,16 @@ const temp = {
     console.log('function imbriqué, arg=', arg);
   }
 }
+
+
+
 async function setCategory (token, category){
   temp.fun('test');
   var reponse = await users.update({token}, {category});
   return reponse;
 }
+
+
 
 async function addArticleToBD(token, title, description, urlToImage, content, url){
   var reponse = 'is present in BD'
@@ -194,6 +225,8 @@ async function addArticleToBD(token, title, description, urlToImage, content, ur
   }
     return reponse;
 }
+
+
 
 async function delArticleToBD(token,  img){
   var reponse = 'error';

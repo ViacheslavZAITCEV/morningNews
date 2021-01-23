@@ -1,6 +1,6 @@
 const mongoose = require("./connection");
 
-var article = {
+var articles = {
     _id: Number,
     title : String, 
     description : String, 
@@ -9,10 +9,10 @@ var article = {
     url : String
 };
 
-var articleSchema = mongoose.Schema(article);
+var articleSchema = mongoose.Schema(articles);
 
 
-var user = {
+var users = {
     token : String,
     email : String,
     pass : String,
@@ -20,10 +20,10 @@ var user = {
     lang: String,
     country : String,
     category : String,
-    news : Array
+    news : [articleSchema],
 }
 
-var userSchema = mongoose.Schema ( user );
+var userSchema = mongoose.Schema ( users );
 var users = mongoose.model('users', userSchema);
 
 

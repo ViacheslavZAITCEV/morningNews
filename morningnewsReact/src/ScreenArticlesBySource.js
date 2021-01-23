@@ -18,6 +18,8 @@ function mapStateToProps(state){
       country : state.user.country, 
       category : state.user.category,
       wishist : state.user.news }
+
+
   }else{
     return {
       token : 'vide',
@@ -43,11 +45,18 @@ function ScreenArticlesBySource(props) {
   useEffect(() => {
     const findArticles = async() => {
       var apiKey = apikey;
-      const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
-      const body = await data.json()
-      console.log ('findArticles from API');
-      console.log('body=', body)
-      setArticleList(body.articles) 
+
+      try {
+        const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
+        const body = await data.json()
+        // console.log ('findArticles from API');
+        // console.log('body=', body)
+        setArticleList(body.articles) 
+        
+      } catch (error) {
+        console.log (error);
+        
+      }
     }
 
     findArticles(); 
@@ -81,8 +90,9 @@ function ScreenArticlesBySource(props) {
     var reponseBE = await fetch("/addArticle", requet);
     console.log('addArticleToBD, route= /addArticle  reponseBE=', reponseBE);
 }
-// http://localhost:3001/screenarticlesbysource/https://www.rbc.ru/economics/15/01/2021/6000bcae9a79477c7d2bde36?from=from_main_4
-//                                             /44
+
+
+
 return (
     <div>
          
@@ -109,8 +119,18 @@ return (
                   />
                   }
                   actions={[
-                      <Icon type="read" key="ellipsis2" onClick={() => showModal(article.title,article.content,article.url)} />,
-                      <Icon type="like" key="ellipsis"  onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} />
+                      <Icon 
+                      type="read" 
+                      key="ellipsis2" 
+                      onClick={() => showModal(article.title,article.content,article.url)} 
+                      />,
+
+                      <Icon 
+                      type="like" 
+                      key="ellipsis"
+                      color='#red'
+                      onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} 
+                      />
                   ]}
                   >
 

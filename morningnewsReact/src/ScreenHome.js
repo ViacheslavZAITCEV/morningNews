@@ -50,7 +50,7 @@ function ScreenHome(props) {
       // var resultRAW = await fetch(`/signin?login=${login}&pass=${pass}`);
       var result = await resultRAW.json();
       if(result.succes){
-        console.log('login with email = ', result.user.email);
+        // console.log('login with email = ', result.user.email);
         props.setUser(result.user);
         setSignin(true);
       }else{
@@ -72,7 +72,7 @@ function ScreenHome(props) {
       var resultRAW = await fetch(`/signup`, requet);
       var result = await resultRAW.json();
       if(result.succes){
-        console.log('login with email = ', result.user.email);
+        // console.log('login with email = ', result.user.email);
         props.setUser(result.user);
         setSignin(true);
       }else{
@@ -82,12 +82,12 @@ function ScreenHome(props) {
   }
 
   function  clearErr(){
-    console.log('clearing errors ');
+    // console.log('clearing errors ');
     setErrSignIn('');
     setErrSignUp('');
   }
   function misErrInscr(err){
-    console.log('mis en place ', err);
+    // console.log('mis en place ', err);
     setErrSignUp(err);
   }
   function misErrSignin(err){

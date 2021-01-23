@@ -46,14 +46,21 @@ function ScreenSource(props) {
   
   async function chargeNews(lang, country, category){
     var apiKey = apikey;
-    const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
-    const body = await data.json();
-    // console.log(body.sources);
-    setSourceList(body.sources);
+
+    try {
+      const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
+      const body = await data.json();
+      // console.log(body.sources);
+      setSourceList(body.sources);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
-
-
-
+  
+  
+  
   async function updateBD(route, arg){
     var body = `${arg}token=${props.token}`
     var requet = {
@@ -62,9 +69,19 @@ function ScreenSource(props) {
       body : body
     };
     // console.log('updateBD, route=', route, ',  body=', body);
-    var reponseBE = await fetch(route, requet);
+    
+    try {
+      var reponseBE = await fetch(route, requet);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
     // console.log('updateBD, route = ', route, '  reponseBE=', reponseBE);
   }
+
+
+
 
 
   // mis à jour les états les Reduxs
@@ -74,16 +91,22 @@ function ScreenSource(props) {
     setCategory(category);
     chargeNews(lang, country, category);
   }
+
+
   async function majLang(lang){
     misajour(lang, country, category);
     props.setLang(lang);
     updateBD('/setLang', lang);    
   }    
+
+
   function majCountry(country){
     misajour(lang, country, category);
     props.setCountry(country);
     updateBD('/setCountry', country);
   } 
+
+
   function majCategory(category){
     misajour(lang, country, category);
     props.setCategory(category);
@@ -91,6 +114,12 @@ function ScreenSource(props) {
   }
 
     
+
+
+
+
+
+
   function menuLang() {
     return (
       <Menu>
@@ -118,6 +147,11 @@ function ScreenSource(props) {
       </Menu>
     );
   }
+
+
+
+
+
 
   function menuCountry (){
     return (
@@ -150,6 +184,9 @@ function ScreenSource(props) {
     );
   };
   
+
+
+
   function menuCategory (){
     return (
       <Menu>
@@ -182,11 +219,21 @@ function ScreenSource(props) {
   };
 
     
+
+
+
+
+
+
+
   if(props.token == 'vide'){
     return (
       <Redirect to="/" />
     )
   }else{
+
+
+
 
     return (
       <div>
@@ -233,6 +280,11 @@ function ScreenSource(props) {
   }
 }
 
+
+
+
+
+
 function mapDispatchToProps(dispatch){
   return{
     setLang : function(lang){
@@ -251,17 +303,3 @@ function mapDispatchToProps(dispatch){
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (ScreenSource);
-
-
-
-/*
-npm install --save react-native-gesture-handler \
-react-native-reanimated \
-react-native-screens \
-react-native-web \
-react-navigation \
-react-navigation-stack \
-react-navigation-tabs \
-@react-native-community/masked-view \
-react-native-safe-area-context
-*/
