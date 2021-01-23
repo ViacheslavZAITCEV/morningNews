@@ -242,16 +242,11 @@ function ScreenSource(props) {
 
             <Dropdown overlay={menuLang} placement="bottomLeft">
               <Button >
-                Language - {lang.substring(9,11)} &nbsp;
-                <img 
-                  className="Drapeau"
-                  alt='Language'
-                  src={ 
-                    lang.substring(9,11) ?
-                    `/images/${lang.substring(9,11)}.png` :
-                    `/images/all.png` 
-                  }
-                />
+                Language - {  
+                  lang.substring(9,11) ?
+                  lang.substring(9,11) :
+                  <span> All </span>
+                } &nbsp;
               </Button>
             </Dropdown>
 
@@ -260,8 +255,17 @@ function ScreenSource(props) {
                 Country's source - {  
                   country.substring(8,10) ?
                   country.substring(8,10) :
-                  <span> All</span>
-                }
+                  <span> All </span>
+                } &nbsp;
+                <img 
+                  className="Drapeau"
+                  alt='Country'
+                  src={ 
+                    country.substring(8,10) ?
+                    `/images/${country.substring(8,10)}.png` :
+                    `/images/all.png` 
+                  }
+                />
               </Button>
             </Dropdown>
 
