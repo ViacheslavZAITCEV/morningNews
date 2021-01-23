@@ -222,13 +222,6 @@ function ScreenSource(props) {
 
 
 
-  if(props.token === 'vide'){
-    return (
-      <Redirect to="/" />
-    )
-  }else{
-
-
 
 
     return (
@@ -318,7 +311,7 @@ function ScreenSource(props) {
         </div>
     );
   }
-}
+
 
 
 

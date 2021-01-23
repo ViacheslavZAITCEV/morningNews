@@ -5,10 +5,15 @@ import {Input,Button} from 'antd';
 import {Redirect} from 'react-router-dom'
 import { useEffect } from 'react';
 
+import Nav from './Nav'
+
+
+
+
+
+
 function ScreenHome(props) {
-  // if (props.user.token == 'vide'){
-  //   props.initialiserUser();
-  // }
+
 
   const [login, setLogin] = useState ('');
   const [pass, setPass] = useState ('');
@@ -96,11 +101,13 @@ function ScreenHome(props) {
 
 
   if ( signin ){
-    return (<Redirect to="/screensource" />);
+    return (<Redirect to="/" />);
   }
 
   return (
-    <div className="Login-page" >
+    <div>
+      <Nav/> 
+      <div className="Login-page" >
 
 
           {/* SIGN-IN */}
@@ -166,6 +173,7 @@ function ScreenHome(props) {
             <p>{errSignUp}</p>
           </div>
       </div>
+    </div>
   );
   
 }

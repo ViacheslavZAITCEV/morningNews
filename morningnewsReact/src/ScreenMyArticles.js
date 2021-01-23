@@ -28,14 +28,10 @@ function ScreenMyArticles(props) {
   const [img, setImg] = useState('')
 
   var likes;
-  console.log('wishList = ', props.wishList);
+  // console.log('wishList = ', props.wishList);
 
   
-  if(props.token === 'vide'){
-    return (
-      <Redirect to="/" />
-    )
-  }else{
+
 
 
 
@@ -87,7 +83,14 @@ function ScreenMyArticles(props) {
               />
             }
             actions={[
-              <Icon type="read" key="ellipsis2"   />,
+              <a 
+              href={article.url}
+              target='_blank'
+              alt={article.title}
+              >
+                <Icon type="read" key="ellipsis2"   />
+
+              </a>,
               <Icon type="delete" key="ellipsis" onClick={ ()=> {delArticleToBD(props.token, article) ; props.delAricle(article)}} />
             ]} >
 
@@ -128,7 +131,7 @@ function ScreenMyArticles(props) {
 
 
 
-    console.log('likes=', likes);
+    // console.log('likes=', likes);
 
     return (
       <div>
@@ -139,7 +142,7 @@ function ScreenMyArticles(props) {
         </div>
       </div>
     );
-  }
+  
 }
 
 

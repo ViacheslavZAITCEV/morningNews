@@ -95,11 +95,7 @@ function ScreenArticlesBySource(props) {
     console.log('addArt:icleToBD, route= /addArticle  reponseBE=', reponseBE);
 }
 
-if (props.token === 'vide'){
-  return(
-    <Redirect to='/' />
-  )
-}else{
+
 
   return (
       <div>
@@ -185,7 +181,7 @@ if (props.token === 'vide'){
 
         </div>
     );
-  }
+  
 }
 
 

@@ -3,14 +3,23 @@ import {Link} from 'react-router-dom'
 import './App.css';
 import {Menu, Icon} from 'antd'
 
-function Nav() {
+import { connect } from 'react-redux';
+
+
+function mapStateToProps(state){
+  return {
+    user : state.user,
+  }
+}
+
+function Nav(props) {
 
   return (
     <nav >
       <Menu style={{textAlign: 'center'}} mode="horizontal" theme="dark">
 
         <Menu.Item key="mail">
-          <Link to="/screensource">
+          <Link to="/">
             <Icon type="home" />
             Sources
           </Link>
@@ -24,9 +33,9 @@ function Nav() {
         </Menu.Item>
 
         <Menu.Item key="app">
-          <Link to="/">
+          <Link to="/login">
             <Icon type="logout" />
-            Logout
+            {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
           </Link>
         </Menu.Item>
 
@@ -35,4 +44,8 @@ function Nav() {
   );
 }
 
-export default Nav;
+
+
+
+
+export default connect(mapStateToProps, null) (Nav);

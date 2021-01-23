@@ -22,10 +22,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route component={ScreenHome} path="/" exact />
-          <Route component={ScreenSource} path="/screensource" exact />
+          <Route component={ScreenSource} path="/" exact />
           <Route component={ScreenArticlesBySource} path="/screenarticlesbysource/:id" exact />
           <Route component={ScreenMyArticles} path="/screenmyarticles" exact />
+          <Route component={ScreenHome} path="/login" exact />
         </Switch>
       </Router>
     </Provider>

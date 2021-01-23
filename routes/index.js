@@ -22,6 +22,7 @@ router.post('/signin', async function(req, res, next) {
   pass = req.body.pass;
   console.log('login = ', login);
   console.log('pass  = ', pass);
+
   //-------------------------------
   // var reponse = user (si il existe)
   // var reponse = tab vide (si le compte n'existe pas)
@@ -31,6 +32,7 @@ router.post('/signin', async function(req, res, next) {
     console.log('user unExistant')
     var toReact = {error : 'login est incconu', succes : false};
   }else{
+
     //-------------------------------
     //il y a une compte de user
     //verification le mot de pass
@@ -43,6 +45,7 @@ router.post('/signin', async function(req, res, next) {
       var toReact = {error : 'pass est incorrect', succes : false};
     }
   }
+
   //-------------------------------
   // var toReact = est reponse pour ReactApp
   res.json(toReact);
@@ -60,12 +63,14 @@ router.post('/signup', async function(req, res, next) {
   pass = req.body.pass;
   console.log('login = ', login);
   console.log('pass  = ', pass);
+
   //-------------------------------
   // var reponse = user (si il existe)
   // var reponse = tab vide (si le compte n'existe pas)
   var reponse = await isExistUser(login);
   console.log('reponse  isExistUser= ', reponse);
   if (reponse.length == 0 ){
+
   //-------------------------------
   // il n'y a pas de compte
   // on va creer un compte pour user 
@@ -76,11 +81,13 @@ router.post('/signup', async function(req, res, next) {
     reponse.salt = "";
     var toReact = {user : reponse, succes : true};
   }else{
+
     //-------------------------------
     //il y a une compte d'user
     console.log('Error of inscription');
     var toReact = {error : 'email existe', succes : false};
   }
+
   //-------------------------------
   // var toReact = est reponse pour ReactApp
   res.json(toReact);
@@ -90,9 +97,13 @@ router.post('/signup', async function(req, res, next) {
 
 
 router.post('/setLang', async function( req, res, next){
-  console.log('route: /setLang, req.body.language=', req.body.language, ', token=', req.body.token)
-  var reponse = await setLang(req.body.token, 'language='+ req.body.language+'&');
-  console.log (reponse);
+  console.log('route: /setLang, req.body.language=', req.body.language, ', token=', req.body.token);
+  var reponse;
+  if (req.body.token != 'vide'){
+    reponse = await setLang(req.body.token, 'language='+ req.body.language+'&');
+    console.log (reponse);
+  }
+
   res.json(reponse)
 });
 
@@ -100,9 +111,12 @@ router.post('/setLang', async function( req, res, next){
 
 
 router.post('/setCountry', async function( req, res, next){
-  console.log('route: /setCountry, req.body.country=', req.body.country, ', token=', req.body.token)
-  var reponse = await setCountry(req.body.token, 'country='+ req.body.country+'&');
-  console.log (reponse);
+  console.log('route: /setCountry, req.body.country=', req.body.country, ', token=', req.body.token);
+  var reponse;
+  if (req.body.token != 'vide'){
+    reponse = await setCountry(req.body.token, 'country='+ req.body.country+'&');
+    console.log (reponse);
+  }
   res.json(reponse)
 });
 
@@ -110,9 +124,12 @@ router.post('/setCountry', async function( req, res, next){
 
 
 router.post('/setCategory', async function( req, res, next){
-  console.log('route: /setCategory, req.body.category=', req.body.category, ', token=', req.body.token)
-  var reponse = await setCategory(req.body.token, 'category='+ req.body.category+'&');
-  console.log (reponse);
+  console.log('route: /setCategory, req.body.category=', req.body.category, ', token=', req.body.token);
+  var reponse;
+  if (req.body.token != 'vide'){
+    reponse = await setCategory(req.body.token, 'category='+ req.body.category+'&');
+    console.log (reponse);
+  }
   res.json(reponse)
 });
 
@@ -120,10 +137,12 @@ router.post('/setCategory', async function( req, res, next){
 
 
 router.post('/addArticle', async function(req, res, next){
-  // body : `token=${token}&title=${article.title}&description${article.description}&image=${article.urlToImage}&content=${article.content}`
   console.log('route: addArticle,  req.body=', req.body);
-  var reponse = await addArticleToBD(req.body.token, req.body.title, req.body.description, req.body.urlToImage, req.body.content, req.body.url);
-  console.log ('add article to BD. reponseBD=', reponse);
+  var reponse;
+  if (req.body.token != 'vide'){
+    reponse = await addArticleToBD(req.body.token, req.body.title, req.body.description, req.body.urlToImage, req.body.content, req.body.url);
+    console.log ('add article to BD. reponseBD=', reponse);
+  }
   res.json(reponse)
 })
 
@@ -131,10 +150,12 @@ router.post('/addArticle', async function(req, res, next){
 
 
 router.post('/delArticle', async function(req, res, next){
-  // body : `token=${token}&title=${article.title}&description${article.description}&image=${article.urlToImage}&content=${article.content}`
   console.log('route: delArticle,  req.body=', req.body);
-  var reponse = await delArticleToBD(req.body.token, req.body.urlToImage);
-  console.log ('del article from BD. reponseBD=', reponse);
+  var reponse;
+  if (req.body.token != 'vide'){
+    reponse = await delArticleToBD(req.body.token, req.body.urlToImage);
+    console.log ('del article from BD. reponseBD=', reponse);
+  }
   res.json(reponse)
 })
 
