@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import {Input,Button} from 'antd';
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import { useEffect } from 'react';
 
 function ScreenHome(props) {
@@ -12,7 +12,7 @@ function ScreenHome(props) {
 
   const [login, setLogin] = useState ('');
   const [pass, setPass] = useState ('');
-  const [loginInscr, setLoginInscr] = useState ('your email');
+  const [loginInscr, setLoginInscr] = useState ('your login');
   const [passInscr, setPassInscr] = useState ('your password');
   const [passInscr2, setPassInscr2] = useState ('confirmation password');
   // const [user, setUser] = useState ([]);
@@ -23,7 +23,7 @@ function ScreenHome(props) {
   useEffect(() => {
     props.initialiserUser();
     misajour (login, pass, loginInscr, passInscr, passInscr2);
-  }, []);
+  }, [props,login, pass, loginInscr, passInscr, passInscr2]);
 
 
   function misajour (login, pass, loginInscr, passInscr, passInscr2) {
@@ -37,8 +37,8 @@ function ScreenHome(props) {
 
   const loginFE = async ()=>{
     clearErr();
-    console.log('Process LoginFE. Login=', login);
-    if(login == '' || pass == ''){
+    // console.log('Process LoginFE. Login=', login);
+    if(login === '' || pass === ''){
       misErrSignin ('le/les champs sont vides...');
     }else{
       var requet = {
@@ -60,8 +60,8 @@ function ScreenHome(props) {
   }
   const inscrire = async ()=>{
     clearErr();
-    console.log('inscription. Login=', loginInscr)
-    if (passInscr != passInscr2){
+    // console.log('inscription. Login=', loginInscr);
+    if (passInscr !== passInscr2){
       misErrInscr ('passwords ne sont pas identiques!');
     }else{
       var requet = {
@@ -102,20 +102,67 @@ function ScreenHome(props) {
   return (
     <div className="Login-page" >
 
+
           {/* SIGN-IN */}
           <div className="Sign">
-                  <Input onChange={ (e)=> setLogin(e.target.value)} className="Login-input" placeholder='your email' value={login}/>
-                  <Input.Password onChange={ (e)=> setPass(e.target.value)} className="Login-input" placeholder='your password' value = {pass} />
-            <Button onClick={ ()=> loginFE() } style={{width:'80px'}} type="primary">Sign-in</Button>
+
+                  <Input 
+                  onChange={ (e)=> setLogin(e.target.value)} 
+                  className="Login-input" 
+                  placeholder='your login' 
+                  value={login}
+                  />
+
+                  <Input.Password 
+                  onChange={ (e)=> setPass(e.target.value)} 
+                  className="Login-input" 
+                  placeholder='your password' 
+                  value = {pass} 
+                  />
+
+            <Button 
+            onClick={ ()=> loginFE() } 
+            style={{width:'80px'}} 
+            type="primary"
+            >
+              Sign-in
+            </Button>
+
             <p>{errSignIn}</p>
+
           </div>
+
+
 
           {/* SIGN-UP */}
           <div className="Sign">
-                  <Input onChange={ (e)=> setLoginInscr(e.target.value)} className="Login-input" placeholder={loginInscr} />
-                  <Input.Password onChange={ (e)=> setPassInscr(e.target.value)} className="Login-input" placeholder={passInscr} />
-                  <Input.Password onChange={ (e)=> setPassInscr2(e.target.value)} className="Login-input" placeholder={passInscr2} />
-                  <Button onClick={ ()=> inscrire() } style={{width:'80px'}} type="primary">Sign-up</Button>
+
+                  <Input 
+                  onChange={ (e)=> setLoginInscr(e.target.value)} 
+                  className="Login-input" 
+                  placeholder={loginInscr} 
+                  />
+
+                  <Input.Password 
+                  onChange={ (e)=> setPassInscr(e.target.value)} 
+                  className="Login-input" 
+                  placeholder={passInscr} 
+                  />
+
+                  <Input.Password 
+                  onChange={ (e)=> setPassInscr2(e.target.value)} 
+                  className="Login-input" 
+                  placeholder={passInscr2} 
+                  />
+
+                  <Button 
+                  onClick={ ()=> inscrire() } 
+                  style={{width:'80px'}} 
+                  type="primary"
+                  >
+                    Sign-up
+                  </Button>
+
             <p>{errSignUp}</p>
           </div>
       </div>

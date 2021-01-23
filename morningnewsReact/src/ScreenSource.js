@@ -1,11 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import './App.css';
-import { List, Avatar} from 'antd';
-import { Menu, Dropdown, Button } from 'antd';
+import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from './Nav'
 import { connect } from 'react-redux';
-import { token } from 'morgan';
 
 import apikey from './apikey';
 
@@ -14,9 +12,9 @@ function mapStateToProps(state){
     // state.artLikes = state.user.news;
     return {
       token : state.user.token,
-      lang : state.user.lang, 
-      country : state.user.country, 
-      category : state.user.category,
+      lang : state.user.lang !== 'language=undefined&' ? state.user.lang : '', 
+      country : state.user.country !== 'country=undefined&' ? state.user.country : '', 
+      category : state.user.category !== 'category=undefined&' ? state.user.category : '',
        }
   }else{
     return {
@@ -42,7 +40,7 @@ function ScreenSource(props) {
       country ? country : '', 
       category ? category : ''
     );
-  }, []);
+  }, [lang, country, category]);
   
   async function chargeNews(lang, country, category){
     var apiKey = apikey;
@@ -71,8 +69,9 @@ function ScreenSource(props) {
     // console.log('updateBD, route=', route, ',  body=', body);
     
     try {
-      var reponseBE = await fetch(route, requet);
-      
+      await fetch(route, requet);
+      // var reponseBE = await fetch(route, requet);
+      // console.log('BD=', reponseBD);
     } catch (error) {
       console.log(error);
       
@@ -162,9 +161,6 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majCountry('country=us&')}>
           source - United States
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=uk&')}>
-          source - United Kingdom
-        </Menu.Item>
         <Menu.Item onClick={() => majCountry('country=fr&')}>
           source - France
         </Menu.Item>
@@ -226,7 +222,7 @@ function ScreenSource(props) {
 
 
 
-  if(props.token == 'vide'){
+  if(props.token === 'vide'){
     return (
       <Redirect to="/" />
     )
@@ -239,21 +235,59 @@ function ScreenSource(props) {
       <div>
         <Nav/> 
 
-        <Dropdown overlay={menuLang} placement="bottomLeft">
-          <Button >Language - {lang.substring(9,11)} &nbsp;
-            <img 
-              className="Drapeau"
-              src={ lang.substring(9,11) ? `/images/${lang.substring(9,11)}.png` : `/images/all.png` }
-            >
-            </img>
-          </Button>
-        </Dropdown>
-        <Dropdown overlay={menuCountry} placement="bottomCenter">
-          <Button>Country's source - {  country.substring(8,10) ? country.substring(8,10) : <span> All</span>}</Button>
-        </Dropdown>
-        <Dropdown overlay={menuCategory} placement="bottomRight">
-          <Button>Category - {category.substring(9,category.length-1) ? category.substring(9,category.length-1) : <span> All</span>}</Button>
-        </Dropdown>
+        <Row>
+          <Col className='sourceMenu'>
+
+
+
+            <Dropdown overlay={menuLang} placement="bottomLeft">
+              <Button >
+                Language - {lang.substring(9,11)} &nbsp;
+                <img 
+                  className="Drapeau"
+                  alt='Language'
+                  src={ 
+                    lang.substring(9,11) ?
+                    `/images/${lang.substring(9,11)}.png` :
+                    `/images/all.png` 
+                  }
+                />
+              </Button>
+            </Dropdown>
+
+            <Dropdown overlay={menuCountry} placement="bottomCenter">
+              <Button>
+                Country's source - {  
+                  country.substring(8,10) ?
+                  country.substring(8,10) :
+                  <span> All</span>
+                }
+              </Button>
+            </Dropdown>
+
+            <Dropdown overlay={menuCategory} placement="bottomRight">
+              <Button>
+                Category - {
+                  category.substring(9,category.length-1) ?
+                  category.substring(9,category.length-1) : 
+                  <span> All </span>
+                } &nbsp;
+                <img 
+                  className="Drapeau"
+                  alt='Category'
+                  src={ 
+                    category.substring(9,category.length-1) ?
+                    `/images/${category.substring(9,category.length-1)}.png` :
+                    `/images/allCategorys.png` 
+                  }
+                />
+              </Button>
+            </Dropdown>
+
+
+
+          </Col>
+        </Row>
 
         <div className="Banner"/>
         <div className="HomeThemes">
@@ -262,6 +296,7 @@ function ScreenSource(props) {
                     itemLayout="horizontal"
                     dataSource={sourceList}
                     renderItem={source => (
+
                       <List.Item>
                         <List.Item.Meta
                           avatar={<Avatar src={`/images/${source.category}.png`} />}
@@ -269,6 +304,7 @@ function ScreenSource(props) {
                           description={source.description}
                         />
                       </List.Item>
+
                     )}
                   />
 

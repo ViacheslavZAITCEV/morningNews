@@ -1,12 +1,12 @@
 export default function (user = {token : "vide"}, action){
     var newUser;
-    var wishList;
-    console.log('user.reduceur, action.type=', action.type);
+    var wishList = [];
+    // console.log('user.reduceur, action.type=', action.type);
 
 
 
     if (action.type ==='token'){
-        console.log('login user=', action.user);
+        // console.log('login user=', action.user);
         newUser = action.user;
         return newUser;
 
@@ -59,7 +59,7 @@ export default function (user = {token : "vide"}, action){
 
 
     } else if (action.type ==='delArticle') {
-        console.log('delArticle, user.news=', user.news);
+        // console.log('delArticle, user.news=', user.news);
         wishList = user.news.filter(art => art.urlToImage !== action.article.urlToImage);
         newUser = {
             token : user.token,
@@ -71,16 +71,21 @@ export default function (user = {token : "vide"}, action){
             category : user.category,
             news : wishList 
         }
-        console.log('delArticle, newUser.news=', newUser.news);
+        // console.log('delArticle, newUser.news=', newUser.news);
         return newUser;
 
 
     } else if (action.type ==='likeArticle') {
-        if ( user.news.length > 1 ){
-            wishList = user.news.filter(art => art.urlToImage !== action.article.urlToImage);
-        }else if (user.new.length > 0 && user.news[0].urlToImage === action.article.urlToImage) {
-            wishList = [];
-        }
+        console.log ('user=', user)
+        console.log ('action=', action)
+        
+        // if ( user.news.length > 1 ){
+        wishList = user.news.filter(art => art.urlToImage !== action.article.urlToImage);
+        
+        // }else if (user.news.length === 0 || user.news.length > 0 && user.news[0].urlToImage === action.article.urlToImage) {
+            // wishList = [];
+        
+            // }
 
         wishList.push(action.article);
         newUser = {

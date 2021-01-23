@@ -48,12 +48,18 @@ h4 {
 }
 
 .Banner {
-  height: 80px;
+  height: 15px;
   background-image: '/images/19388.png';
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.8;
+}
+
+.sourceMenu{
+  display: flex;
+  justify-content: center;
+
 }
 
 .Card{
@@ -64,6 +70,14 @@ h4 {
 }
 
 .Drapeau {
-  max-height: 15px;
+  max-height: 25px;
+}
+
+.modal {
+  width: 50vw;
+}
+
+.imgModal {
+  width: 100%;
 }
 
