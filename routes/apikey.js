@@ -1,4 +1,4 @@
 // var apiKey = 'apiKey=0eff525748614b6c85fb1a068191de4e';
-const apikey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
+const apiKey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
 
-export default apikey;
+export default apiKey;
