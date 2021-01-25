@@ -44,15 +44,32 @@ function ScreenArticlesBySource(props) {
     const findArticles = async() => {
 
       try {
-        // const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
-        // const body = await data.json()
+        var toBackend = {
+          url : `https://newsapi.org/v2/top-headlines?`,
+          sources : props.match.params.id
+        }
+        var fromFront = JSON.stringify(toBackend);
+        var requet = {
+          method : 'POST',
+          headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
+          body : `fromFront=${fromFront}`
+        }
 
-        // console.log ('findArticles from API');
-        // console.log('body=', body)
-        // setArticleList(body.articles) 
-        
+        // const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
+        console.log('requet=', requet);
+        const data = await fetch('/getArticles', requet)
+        const body = await data.json()
+
+        if (body.status){
+          // console.log ('findArticles from API');
+          // console.log('body=', body)
+          setArticleList(body.articles) 
+
+        }else{
+          console.log( 'error BE=', body.error )
+        }
       } catch (error) {
-        console.log (error);
+        console.log ('error fetch( route= /getArticles )=', error);
         
       }
     }

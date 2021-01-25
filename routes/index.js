@@ -4,6 +4,12 @@ var uid2 = require('uid2');
 var SHA256 = require('crypto-js/sha256');
 var encBase64 = require('crypto-js/enc-base64');
 var users = require('../models/users');
+var request = require('sync-request');
+const { response } = require('express');
+// cons apiKey = require( './apiKey');
+
+
+const apiKey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
 
 const apikey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
 
@@ -162,6 +168,67 @@ router.post('/delArticle', async function(req, res, next){
 
 
 
+router.post ('/fetch', async function (req, res, next){
+  console.log ('route /fetch');
+  console.log ('req.body = ', req.body);
+  var fromFrontRAW = req.body.fromFront;
+  var fromFront = JSON.parse(fromFrontRAW);
+  // console.log ('fromFront = ', fromFront);
+  var response = {status : false};
+  
+  if (fromFront.lang) {
+    fromFront.lang = fromFront.lang + '&'
+  }
+  
+  if (fromFront.country) {
+    fromFront.country = fromFront.country + '&'
+  }
+  
+  if (fromFront.category) {
+    fromFront.category = fromFront.category + '&'
+  }
+  
+  try {
+
+    var data = await request('GET', `${fromFront.url}${fromFront.lang}${fromFront.country}${fromFront.category}${apiKey}`);
+    // console.log('data.body=', data.body);
+    var body = JSON.parse(data.getBody());
+    // console.log('body=', body);
+    response.response = body.sources;
+    // console.log('response.response=', response.response);
+    response.status = true;
+
+  } catch (error) {
+    console.log(error);
+    response.error= error;    
+  }
+  
+  // console.log('response=', response);
+  res.json(response);
+})
+
+
+
+
+router.post ('/getArticles', async function (req,res,next){
+
+  console.log( 'route getArticles, req.body=', req.body);
+  var response = { status : false };
+  var fromFront = JSON.parse(req.body.fromFront)
+
+  try {
+    var data = await request('GET', `${fromFront.url}sources=${fromFront.sources}&${apiKey}`);
+    response.articles = JSON.parse(data.getBody()).articles;
+    response.status = true;
+  } catch (error) {
+    console.log( 'route getArticles, catch.error=', body.error )
+  }
+
+
+  console.log('response=', response);
+
+  res.json(response)
+})
 
 router.post('/getArticles', async function(req, res, next){
   console.log('route: fetch,  req.body=', req.body);
