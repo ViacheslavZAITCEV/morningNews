@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import './App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from './Nav'
 import { connect } from 'react-redux';
 
-import apikey from './apikey';
+// import apikey from './apikey';
 
 function mapStateToProps(state){
   if(state.user.token !== "vide"){
@@ -43,16 +43,38 @@ function ScreenSource(props) {
   }, [lang, country, category]);
   
   async function chargeNews(lang, country, category){
-    var apiKey = apikey;
+
+    var toBack = {
+      url : 'https://newsapi.org/v2/sources?',
+      lang : lang,
+      country : country,
+      category : category,
+    }
+    var fromFront=JSON.stringify(toBack);
 
     try {
-      const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
+      console.log('etape1');
+      var requet = {
+        method: 'POST',
+        headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
+        body : `fromFront=${fromFront}`
+      }
+      console.log('requet');
+      // const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
+      const data = await fetch('/fetch', requet);
       const body = await data.json();
-      // console.log(body.sources);
-      setSourceList(body.sources);
+      console.log('etape2, body=', body);
+
+      if( body.status ){
+        console.log('etape2, body.response=', body.response);
+        setSourceList(body.response);
+        // console.log('body.sources=', body.sources);
+      }else{
+        console.log('error BackEnd=', body.error);
+      }
       
     } catch (error) {
-      console.log(error);
+      console.log('error fetch=', error);
       
     }
   }
@@ -125,22 +147,22 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majLang('')}>
           All languages
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=en&')}>
+        <Menu.Item onClick={() => majLang('language=en')}>
           English
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=fr&')}>
+        <Menu.Item onClick={() => majLang('language=fr')}>
           French
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=ru&')}>
+        <Menu.Item onClick={() => majLang('language=ru')}>
           Russian
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=de&')}>
+        <Menu.Item onClick={() => majLang('language=de')}>
           Deutch
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=it&')}>
+        <Menu.Item onClick={() => majLang('language=it')}>
           Italian
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=pt&')}>
+        <Menu.Item onClick={() => majLang('language=pt')}>
           Portugaise
         </Menu.Item>
       </Menu>
@@ -158,22 +180,22 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majCountry('')}>
           All country's sources
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=us&')}>
+        <Menu.Item onClick={() => majCountry('country=us')}>
           source - United States
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=fr&')}>
+        <Menu.Item onClick={() => majCountry('country=fr')}>
           source - France
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=ru&')}>
+        <Menu.Item onClick={() => majCountry('country=ru')}>
           source - Russia
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=de&')}>
+        <Menu.Item onClick={() => majCountry('country=de')}>
           source - Deutchland
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=it&')}>
+        <Menu.Item onClick={() => majCountry('country=it')}>
           source - Italy
         </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=br&')}>
+        <Menu.Item onClick={() => majCountry('country=br')}>
           source - Brasil
         </Menu.Item>
       </Menu>
@@ -189,25 +211,25 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majCategory('')}>
           All categorys
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=general&')}>
+        <Menu.Item onClick={() => majCategory('category=general')}>
           general
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=entertainment&')}>
+        <Menu.Item onClick={() => majCategory('category=entertainment')}>
           entertainment
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=business&')}>
+        <Menu.Item onClick={() => majCategory('category=business')}>
           business
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=health&')}>
+        <Menu.Item onClick={() => majCategory('category=health')}>
           health
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=science&')}>
+        <Menu.Item onClick={() => majCategory('category=science')}>
           science
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=sports&')}>
+        <Menu.Item onClick={() => majCategory('category=sports')}>
           sports
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=technology&')}>
+        <Menu.Item onClick={() => majCategory('category=technology')}>
           technology
         </Menu.Item>
       </Menu>
@@ -265,16 +287,16 @@ function ScreenSource(props) {
             <Dropdown overlay={menuCategory} placement="bottomRight">
               <Button>
                 Category - {
-                  category.substring(9,category.length-1) ?
-                  category.substring(9,category.length-1) : 
+                  category.substring(9,category.length) ?
+                  category.substring(9,category.length) : 
                   <span> All </span>
                 } &nbsp;
                 <img 
                   className="Drapeau"
                   alt='Category'
                   src={ 
-                    category.substring(9,category.length-1) ?
-                    `/images/${category.substring(9,category.length-1)}.png` :
+                    category.substring(9,category.length) ?
+                    `/images/${category.substring(9,category.length)}.png` :
                     `/images/allCategorys.png` 
                   }
                 />

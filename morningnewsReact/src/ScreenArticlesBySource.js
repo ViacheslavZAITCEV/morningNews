@@ -49,14 +49,32 @@ function ScreenArticlesBySource(props) {
       var apiKey = apikey;
 
       try {
-        const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
+        var toBackend = {
+          url : `https://newsapi.org/v2/top-headlines?`,
+          sources : props.match.params.id
+        }
+        var fromFront = JSON.stringify(toBackend);
+        var requet = {
+          method : 'POST',
+          headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
+          body : `fromFront=${fromFront}`
+        }
+
+        // const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
+        console.log('requet=', requet);
+        const data = await fetch('/getArticles', requet)
         const body = await data.json()
-        // console.log ('findArticles from API');
-        // console.log('body=', body)
-        setArticleList(body.articles) 
-        
+
+        if (body.status){
+          // console.log ('findArticles from API');
+          // console.log('body=', body)
+          setArticleList(body.articles) 
+
+        }else{
+          console.log( 'error BE=', body.error )
+        }
       } catch (error) {
-        console.log (error);
+        console.log ('error fetch( route= /getArticles )=', error);
         
       }
     }
