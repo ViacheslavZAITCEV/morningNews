@@ -5,13 +5,11 @@ var SHA256 = require('crypto-js/sha256');
 var encBase64 = require('crypto-js/enc-base64');
 var users = require('../models/users');
 var request = require('sync-request');
-const { response } = require('express');
-// cons apiKey = require( './apiKey');
 
 
-const apiKey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
+const apiKey = process.env.API_KEY;
+// console.log("apiKey=", apiKey)
 
-const apikey = 'apiKey=363e10d03e28468da1fc356d3eff9f14';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -190,7 +188,7 @@ router.post ('/fetch', async function (req, res, next){
   
   try {
 
-    var data = await request('GET', `${fromFront.url}${fromFront.lang}${fromFront.country}${fromFront.category}${apiKey}`);
+    var data = await request('GET', `${fromFront.url}${fromFront.lang}${fromFront.country}${fromFront.category}apiKey=${apiKey}`);
     // console.log('data.body=', data.body);
     var body = JSON.parse(data.getBody());
     // console.log('body=', body);
@@ -217,7 +215,7 @@ router.post ('/getArticles', async function (req,res,next){
   var fromFront = JSON.parse(req.body.fromFront)
 
   try {
-    var data = await request('GET', `${fromFront.url}sources=${fromFront.sources}&${apiKey}`);
+    var data = await request('GET', `${fromFront.url}sources=${fromFront.sources}&apiKey=${apiKey}`);
     response.articles = JSON.parse(data.getBody()).articles;
     response.status = true;
   } catch (error) {
@@ -237,7 +235,7 @@ router.post('/getArticles', async function(req, res, next){
   console.log('route: fetch,  url=', url);
   var reponse= {status : false};
   try {
-    reponse.reponse = await fetch(`${url.url}${url.lang}${url.country}${url.category}${apikey}`);
+    reponse.reponse = await fetch(`${url.url}${url.lang}${url.country}${url.category}apiKey=${apiKey}`);
 
     reponse.status = true;
   } catch (error) {

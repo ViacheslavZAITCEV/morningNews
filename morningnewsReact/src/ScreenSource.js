@@ -5,6 +5,8 @@ import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from './Nav'
 import { connect } from 'react-redux';
 
+import {countrys} from './constants/constants'
+
 // import apikey from './apikey';
 
 function mapStateToProps(state){
@@ -165,16 +167,48 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majLang('language=pt')}>
           Portugaise
         </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=es')}>
+          Espagnol
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=he')}>
+          Hébreu
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=nl')}>
+          Néerlandais
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=no')}>
+          Norvégien
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=se')}>
+          Suedois
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=ud')}>
+          Néerlandais
+        </Menu.Item>
+        <Menu.Item onClick={() => majLang('language=zh')}>
+          Norvégien
+        </Menu.Item>
       </Menu>
     );
   }
 
+  const menuCountry = ()=>{
+    return (
+      <Menu>
+        <Menu.Item onClick={() => majCountry('')}>
+          All country's sources
+        </Menu.Item>
+        {/* { countrys.map( (c, i) =>{
+            <Menu.Item key={i} onClick={() => majCountry(`country=${c.country}`)}>
+              source : {c.countryName}
+          </Menu.Item>
+        })} */}
+      </Menu>
+    )
+  }
 
 
-
-
-
-  function menuCountry (){
+  function menuCountry2 (){
     return (
       <Menu>
         <Menu.Item onClick={() => majCountry('')}>
@@ -197,6 +231,30 @@ function ScreenSource(props) {
         </Menu.Item>
         <Menu.Item onClick={() => majCountry('country=br')}>
           source - Brasil
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=ie')}>
+          source - Ireland
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=in')}>
+          source - India
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=ar')}>
+          source - Argentine
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=au')}>
+          source - Australie
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=ca')}>
+          source - Canada
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=nl')}>
+          source - Netherlands
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=no')}>
+          source - Norway
+        </Menu.Item>
+        <Menu.Item onClick={() => majCountry('country=se')}>
+          source - Sweden
         </Menu.Item>
       </Menu>
     );
@@ -253,8 +311,6 @@ function ScreenSource(props) {
         <Row>
           <Col className='sourceMenu'>
 
-
-
             <Dropdown overlay={menuLang} placement="bottomLeft">
               <Button >
                 Language - {  
@@ -302,7 +358,6 @@ function ScreenSource(props) {
                 />
               </Button>
             </Dropdown>
-
 
 
           </Col>

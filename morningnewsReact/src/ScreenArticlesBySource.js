@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 // import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './App.css';
-import { Card, Icon, Modal, Divider} from 'antd';
+import { Card, Icon} from 'antd';
 import Nav from './Nav'
 
 
@@ -130,23 +130,19 @@ function ScreenArticlesBySource(props) {
                     flexDirection: 'column',
                     justifyContent:'space-between' }}
                     cover={
-                    <img
-                        alt="example"
-                        src={article.urlToImage}
-                        onClick={() => showModal(article.title, article.content, article.url, article.urlToImage)} 
-                        />
+                      <a
+                      href={article.url}
+                      target='_blank'
+                      alt={article.title}
+                      >
+                        <img
+                          alt="example"
+                          src={article.urlToImage}
+                          onClick={() => showModal(article.title, article.content, article.url, article.urlToImage)} 
+                          />
+                        </a>
                       }
                       actions={[
-                        <a
-                        href={article.url}
-                        target='_blank'
-                        alt={article.title}
-                        >
-                        <Icon 
-                        type="read" 
-                        key="ellipsis2" 
-                        />
-                      </a>,
 
                       <Icon 
                         type="like" 
@@ -164,27 +160,6 @@ function ScreenArticlesBySource(props) {
                     />
 
                   </Card>
-                  <Modal
-                    className='modal'
-                    title={title}
-                    visible={visible}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                  >
-                    <a
-                    href={article.url}
-                    target='_blank'
-                    alt={article.title}
-                    >
-                      <img
-                      alt={title}
-                      className='imgModal'
-                      src={img}
-                      />
-                    </a>
-                    <Divider />
-                    <a href={url} target='_blank'>{content}</a>
-                  </Modal>
 
                 </div>
 

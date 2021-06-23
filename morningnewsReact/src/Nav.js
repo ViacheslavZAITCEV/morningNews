@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import './App.css';
-import {Menu, Icon} from 'antd'
+import {Menu, Icon, Col, Row} from 'antd'
 
 import { connect } from 'react-redux';
 
