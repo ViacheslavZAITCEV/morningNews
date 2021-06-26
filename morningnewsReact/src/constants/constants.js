@@ -51,9 +51,86 @@ export const countrys = [
     country: 'se',
     countryName: 'Sweden',
   },
+];
+
+
+
+export const categorys = [
   {
-    country: 'us',
-    countryName: 'Country',
+    category: 'general',
+    categoryName: 'general',
+    img: '/images/general.png',
+  },
+  {
+    category: 'entertainment',
+    categoryName: 'entertainment',
+    img: '/images/entertainment.png',
+  },
+  {
+    category: 'business',
+    categoryName: 'business',
+    img: '/images/business.png',
+  },
+  {
+    category: 'health',
+    categoryName: 'health',
+    img: '/images/health.png',
+  },
+  {
+    category: 'science',
+    categoryName: 'science',
+    img: '/images/science.png',
+  },
+  {
+    category: 'sports',
+    categoryName: 'sports',
+    img: '/images/sports.png',
+  },
+  {
+    category: 'technology',
+    categoryName: 'technology',
+    img: '/images/technology.png',
+  },
+];
+
+
+
+
+export const language = [
+  {
+    category: 'general',
+    categoryName: 'general',
+    img: '/images/general.png',
+  },
+  {
+    category: 'entertainment',
+    categoryName: 'entertainment',
+    img: '/images/entertainment.png',
+  },
+  {
+    category: 'business',
+    categoryName: 'business',
+    img: '/images/business.png',
+  },
+  {
+    category: 'health',
+    categoryName: 'health',
+    img: '/images/health.png',
+  },
+  {
+    category: 'science',
+    categoryName: 'science',
+    img: '/images/science.png',
+  },
+  {
+    category: 'sports',
+    categoryName: 'sports',
+    img: '/images/sports.png',
+  },
+  {
+    category: 'technology',
+    categoryName: 'technology',
+    img: '/images/technology.png',
   },
 ];
 

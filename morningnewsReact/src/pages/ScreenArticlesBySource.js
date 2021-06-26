@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-// import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './App.css';
 import { Card, Icon} from 'antd';
-import Nav from './Nav'
+import Nav from '../components/Nav'
 
 
 function mapStateToProps(state){
@@ -34,11 +33,7 @@ function ScreenArticlesBySource(props) {
 
   const [articleList, setArticleList] = useState([])
 
-  const [visible, setVisible] = useState(false)
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [url, setUrl] = useState('')
-  const [img, setImg] = useState('')
+
 
   useEffect(() => {
     const findArticles = async() => {
@@ -77,23 +72,9 @@ function ScreenArticlesBySource(props) {
     findArticles(); 
   },[props.match.params.id])
 
-  var showModal = (title, content, url, img) => {
-    setVisible(true);
-    setTitle(title);
-    setContent(content);
-    setUrl(url);
-    setImg(img);
-  }
 
-  var handleOk = e => {
-    // console.log(e);
-    setVisible(false);
-  }
 
-  var handleCancel = e => {
-    // console.log(e);
-    setVisible(false);
-  }
+
 
   async function addArticleToBD(token, article){
     console.log('token=', token)
@@ -104,8 +85,8 @@ function ScreenArticlesBySource(props) {
       body : `token=${token}&title=${article.title}&description=${article.description}&urlToImage=${article.urlToImage}&content=${article.content}&url=${article.url}`
     };
     // await fetch("/addArticle", requet);
-    var reponseBE = await fetch("/addArticle", requet);
-    console.log('addArt:icleToBD, route= /addArticle  reponseBE=', reponseBE);
+    await fetch("/addArticle", requet);
+    // console.log('addArt:icleToBD, route= /addArticle  reponseBE=', reponseBE);
 }
 
 
@@ -138,7 +119,6 @@ function ScreenArticlesBySource(props) {
                         <img
                           alt="example"
                           src={article.urlToImage}
-                          onClick={() => showModal(article.title, article.content, article.url, article.urlToImage)} 
                           />
                         </a>
                       }
@@ -154,7 +134,6 @@ function ScreenArticlesBySource(props) {
                       >
 
                     <Meta
-                      onClick={() => showModal(article.title,article.content,article.url, article.urlToImage)} 
                       title={article.title}
                       description={article.description}
                     />

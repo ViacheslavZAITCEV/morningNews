@@ -2,31 +2,13 @@ import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import './App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
-import Nav from './Nav'
+import Nav from '../components/Nav'
 import { connect } from 'react-redux';
 
-import {countrys} from './constants/constants'
+import {countrys, categorys} from '../constants/constants'
 
 // import apikey from './apikey';
 
-function mapStateToProps(state){
-  if(state.user.token !== "vide"){
-    // state.artLikes = state.user.news;
-    return {
-      token : state.user.token,
-      lang : state.user.lang !== 'language=undefined&' ? state.user.lang : '', 
-      country : state.user.country !== 'country=undefined&' ? state.user.country : '', 
-      category : state.user.category !== 'category=undefined&' ? state.user.category : '',
-       }
-  }else{
-    return {
-      token : 'vide',
-      lang : '',
-      country : '',
-      category : ''
-    }
-  }
-}
 
 
 function ScreenSource(props) {
@@ -137,6 +119,7 @@ function ScreenSource(props) {
   }
 
     
+  
 
 
 
@@ -192,104 +175,50 @@ function ScreenSource(props) {
     );
   }
 
+
+
   const menuCountry = ()=>{
     return (
       <Menu>
         <Menu.Item onClick={() => majCountry('')}>
           All country's sources
+        <img style={{height: '3vh' }} src={ `./images/all.png`} />
         </Menu.Item>
-        {/* { countrys.map( (c, i) =>{
-            <Menu.Item key={i} onClick={() => majCountry(`country=${c.country}`)}>
-              source : {c.countryName}
-          </Menu.Item>
-        })} */}
+        { countrys.map( (c, i) =>{ 
+          return (
+            <Menu.Item key={i} onClick={() => majCountry(`country=${c.country}`)} >
+              <div 
+              style={{heightMax: '3vh' }}
+              >
+                <img src={ `./images/${c.country}.png`}x />
+              </div>
+              {c.countryName}
+            </Menu.Item>
+          )
+        })}
       </Menu>
     )
   }
-
-
-  function menuCountry2 (){
-    return (
-      <Menu>
-        <Menu.Item onClick={() => majCountry('')}>
-          All country's sources
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=us')}>
-          source - United States
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=fr')}>
-          source - France
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=ru')}>
-          source - Russia
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=de')}>
-          source - Deutchland
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=it')}>
-          source - Italy
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=br')}>
-          source - Brasil
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=ie')}>
-          source - Ireland
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=in')}>
-          source - India
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=ar')}>
-          source - Argentine
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=au')}>
-          source - Australie
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=ca')}>
-          source - Canada
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=nl')}>
-          source - Netherlands
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=no')}>
-          source - Norway
-        </Menu.Item>
-        <Menu.Item onClick={() => majCountry('country=se')}>
-          source - Sweden
-        </Menu.Item>
-      </Menu>
-    );
-  };
   
-
-
-
+  
+  
   function menuCategory (){
     return (
       <Menu>
         <Menu.Item onClick={() => majCategory('')}>
           All categorys
         </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=general')}>
-          general
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=entertainment')}>
-          entertainment
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=business')}>
-          business
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=health')}>
-          health
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=science')}>
-          science
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=sports')}>
-          sports
-        </Menu.Item>
-        <Menu.Item onClick={() => majCategory('category=technology')}>
-          technology
-        </Menu.Item>
+        {
+          categorys.map ((c, i) =>{
+            return (
+              <Menu.Item style={{justifyContent: 'space-between'}} key={i} onClick={() => majCategory(`category=${c.category}`)}>
+
+                  <img style={{width: '2vw', paddingRight: '10px'}} src={c.img} />
+                {c.categoryName}
+              </Menu.Item>
+            )
+          })
+        }
       </Menu>
     );
   };
@@ -391,7 +320,25 @@ function ScreenSource(props) {
 
 
 
-
+  function mapStateToProps(state){
+    if(state.user.token !== "vide"){
+      // state.artLikes = state.user.news;
+      return {
+        token : state.user.token,
+        lang : state.user.lang !== 'language=undefined&' ? state.user.lang : '', 
+        country : state.user.country !== 'country=undefined&' ? state.user.country : '', 
+        category : state.user.category !== 'category=undefined&' ? state.user.category : '',
+         }
+    }else{
+      return {
+        token : 'vide',
+        lang : '',
+        country : '',
+        category : ''
+      }
+    }
+  }
+  
 
 
 

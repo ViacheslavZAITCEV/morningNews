@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import './App.css';
-import {Menu, Icon, Col, Row} from 'antd'
+import { Menu, Icon } from 'antd'
 
 import { connect } from 'react-redux';
 
@@ -18,21 +18,21 @@ function Nav(props) {
     <nav >
       <Menu style={{textAlign: 'center'}} mode="horizontal" theme="dark">
 
-        <Menu.Item key="mail">
+        <Menu.Item key="home">
           <Link to="/">
             <Icon type="home" />
             Sources
           </Link>
         </Menu.Item>
 
-        <Menu.Item key="test">
+        <Menu.Item key="articles">
           <Link to="/screenmyarticles">
             <Icon type="read" />
             My Articles
           </Link>
         </Menu.Item>
 
-        <Menu.Item key="app">
+        <Menu.Item key="login">
           <Link to="/login">
             <Icon type="logout" />
             {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
