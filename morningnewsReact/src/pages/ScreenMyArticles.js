@@ -1,8 +1,8 @@
 import React, {useState}  from 'react';
 import {Redirect} from 'react-router-dom';
-import './App.css';
-import { Card, Icon, Modal, Divider} from 'antd';
-import Nav from './Nav';
+import '../App.css';
+import { Card,  Modal, Divider} from 'antd';
+import Nav from '../components/Nav';
 import {connect} from 'react-redux';
 
 
@@ -88,10 +88,10 @@ function ScreenMyArticles(props) {
               target='_blank'
               alt={article.title}
               >
-                <Icon type="read" key="ellipsis2"   />
+                <div type="read" key="ellipsis2"   />
 
               </a>,
-              <Icon type="delete" key="ellipsis" onClick={ ()=> {delArticleToBD(props.token, article) ; props.delAricle(article)}} />
+              <div  type="delete" key="ellipsis" onClick={ ()=> {delArticleToBD(props.token, article) ; props.delAricle(article)}} />
             ]} >
 
             <Meta

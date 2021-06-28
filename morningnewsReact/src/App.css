@@ -12,7 +12,8 @@ h4 {
     align-items: center;
     justify-content: center;
     height:100vh;
-    background-image: url('/images/19388.png');
+    /* background-image: url('/images/19388.png'); */
+    /* background-image: url('/images/background.jpg'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -33,7 +34,7 @@ h4 {
     padding-bottom: 15px;
     border-radius: 5%;
     border-color: white;
-    background-color: rgba(63,169,255,0.5);
+    background-color: rgba(148, 83, 9, 0.5);
     margin: 40px;
 }
 
@@ -49,7 +50,7 @@ h4 {
 
 .Banner {
   height: 15px;
-  background-image: '/images/19388.png';
+  background-image: './images/background.png';
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -69,8 +70,14 @@ h4 {
 
 }
 
-.Drapeau {
+.logos {
   max-height: 25px;
+  max-width: 60px;
+}
+
+.drapeau {
+  height: 25px;
+  width: 60px;
 }
 
 .modal {

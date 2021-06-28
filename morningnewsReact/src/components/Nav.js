@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import './App.css';
-import { Menu, Icon } from 'antd'
+import '../App.css';
+import { Menu } from 'antd'
 
 import { connect } from 'react-redux';
 
@@ -20,21 +20,21 @@ function Nav(props) {
 
         <Menu.Item key="home">
           <Link to="/">
-            <Icon type="home" />
+            <div type="home" />
             Sources
           </Link>
         </Menu.Item>
 
         <Menu.Item key="articles">
           <Link to="/screenmyarticles">
-            <Icon type="read" />
+            <div type="read" />
             My Articles
           </Link>
         </Menu.Item>
 
         <Menu.Item key="login">
           <Link to="/login">
-            <Icon type="logout" />
+            <div type="logout" />
             {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
           </Link>
         </Menu.Item>

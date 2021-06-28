@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
-import './App.css';
-import { Card, Icon} from 'antd';
+import '../App.css';
+import { Card } from 'antd';
 import Nav from '../components/Nav'
 
 
@@ -123,14 +123,13 @@ function ScreenArticlesBySource(props) {
                         </a>
                       }
                       actions={[
-
-                      <Icon 
-                        type="like" 
-                        key="ellipsis"
-                        color='#red'
-                        onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} 
-                        />
-                      ]}
+                        <div 
+                          type="like" 
+                          key="ellipsis"
+                          color='#red'
+                          onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} 
+                          />
+                        ]}
                       >
 
                     <Meta

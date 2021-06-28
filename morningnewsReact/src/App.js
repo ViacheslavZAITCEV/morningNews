@@ -2,10 +2,10 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './App.css';
 
-import ScreenHome from './ScreenHome';
-import ScreenArticlesBySource from './ScreenArticlesBySource'
-import ScreenMyArticles from './ScreenMyArticles'
-import ScreenSource from './ScreenSource'
+import ScreenHome from './pages/ScreenHome';
+import ScreenArticlesBySource from './pages/ScreenArticlesBySource'
+import ScreenMyArticles from './pages/ScreenMyArticles'
+import ScreenSource from './pages/ScreenSource'
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 

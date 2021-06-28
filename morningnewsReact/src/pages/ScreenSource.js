@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
-import './App.css';
+import '../App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from '../components/Nav'
 import { connect } from 'react-redux';
@@ -187,12 +187,18 @@ function ScreenSource(props) {
         { countrys.map( (c, i) =>{ 
           return (
             <Menu.Item key={i} onClick={() => majCountry(`country=${c.country}`)} >
-              <div 
-              style={{heightMax: '3vh' }}
-              >
-                <img src={ `./images/${c.country}.png`}x />
+              <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between'
+              }}  >
+              <span className="drapeau">
+                <img className="logos" src={ `./images/${c.country}.png`}x />
+              </span>
+              <span justifyContent="center">
+                {c.countryName}
+              </span>
               </div>
-              {c.countryName}
             </Menu.Item>
           )
         })}
@@ -237,7 +243,7 @@ function ScreenSource(props) {
       <div>
         <Nav/> 
 
-        <Row>
+        
           <Col className='sourceMenu'>
 
             <Dropdown overlay={menuLang} placement="bottomLeft">
@@ -258,7 +264,7 @@ function ScreenSource(props) {
                   <span> All </span>
                 } &nbsp;
                 <img 
-                  className="Drapeau"
+                  className="logos"
                   alt='Country'
                   src={ 
                     country.substring(8,10) ?
@@ -277,7 +283,7 @@ function ScreenSource(props) {
                   <span> All </span>
                 } &nbsp;
                 <img 
-                  className="Drapeau"
+                  className="logos"
                   alt='Category'
                   src={ 
                     category.substring(9,category.length) ?
@@ -288,32 +294,28 @@ function ScreenSource(props) {
               </Button>
             </Dropdown>
 
-
           </Col>
-        </Row>
+          <Col>
+            <div className="HomeThemes Banner">
+            <List
+              itemLayout="horizontal"
+              dataSource={sourceList}
+              renderItem={source => (
+                
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Avatar src={`/images/${source.category}.png`} />}
+                    title={<Link to={`/screenarticlesbysource/${source.id}`}>{source.name}</Link>}
+                    description={source.description}
+                    />
+                </List.Item>
 
-        <div className="Banner"/>
-        <div className="HomeThemes">
-            
-                <List
-                    itemLayout="horizontal"
-                    dataSource={sourceList}
-                    renderItem={source => (
-
-                      <List.Item>
-                        <List.Item.Meta
-                          avatar={<Avatar src={`/images/${source.category}.png`} />}
-                          title={<Link to={`/screenarticlesbysource/${source.id}`}>{source.name}</Link>}
-                          description={source.description}
-                        />
-                      </List.Item>
-
-                    )}
-                  />
-
-
-            </div>
+              )}
+            />
+          </div>
+        </Col>
                   
+
         </div>
     );
   }
