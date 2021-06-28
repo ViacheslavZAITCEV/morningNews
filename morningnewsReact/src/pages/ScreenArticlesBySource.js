@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import '../App.css';
 import { Card } from 'antd';
@@ -13,9 +14,8 @@ function mapStateToProps(state){
       lang : state.user.lang, 
       country : state.user.country, 
       category : state.user.category,
-      wishist : state.user.news }
-
-
+      wishist : state.user.news
+    }
   }else{
     return {
       token : 'vide',
@@ -32,6 +32,8 @@ const { Meta } = Card;
 function ScreenArticlesBySource(props) {
 
   const [articleList, setArticleList] = useState([])
+  const [link, setLink] = useState('')
+  const [redirect, setRedirect] = useState(false)
 
 
 
@@ -87,9 +89,19 @@ function ScreenArticlesBySource(props) {
     // await fetch("/addArticle", requet);
     await fetch("/addArticle", requet);
     // console.log('addArt:icleToBD, route= /addArticle  reponseBE=', reponseBE);
-}
+  }
 
+  const toLink = (url)=>{
+    console.log('click', url)
+    setLink(url);
+    setRedirect(true)
+  }
 
+  if (redirect){
+    return(
+      <Link to={link} />
+    )
+  }else{
 
   return (
       <div>
@@ -103,7 +115,6 @@ function ScreenArticlesBySource(props) {
                   <div key={i} style={{display:'flex',justifyContent:'center'}}>
 
                   <Card
-                    
                     style={{ 
                     width: 300, 
                     margin:'15px', 
@@ -111,30 +122,41 @@ function ScreenArticlesBySource(props) {
                     flexDirection: 'column',
                     justifyContent:'space-between' }}
                     cover={
-                      <a
-                      href={article.url}
-                      target='_blank'
-                      alt={article.title}
-                      >
-                        <img
-                          alt="example"
-                          src={article.urlToImage}
-                          />
-                        </a>
-                      }
-                      actions={[
-                        <div 
-                          type="like" 
-                          key="ellipsis"
-                          color='#red'
-                          onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} 
-                          />
-                        ]}
-                      >
+                      // <>
+                      //   <a
+                      //   style={{ widthMax: 300}}
+                      //   href={article.url}
+                      //   target='_blank'
+                      //   alt={article.title}
+                      //   >
+                      <img 
+                      src={article.urlToImage} 
+                      onClick={ ()=> { toLink(article.url) }}
+                      />
+                      //   </a>
+                      // </>
+                    }
+                    actions={[
+                      <div 
+                      type="like" 
+                      key="ellipsis"
+                      color='#red'
+                      onClick={() => {addArticleToBD(props.token, article) ; props.likeClick(article)}} 
+                      />
+                    ]}
+                    >
 
                     <Meta
                       title={article.title}
-                      description={article.description}
+                      description={
+                        <a
+                        href={article.url}
+                        target='_blank'
+                        alt={article.title}
+                        >
+                          {article.description}
+                        </a>
+                      }
                     />
 
                   </Card>
@@ -147,6 +169,7 @@ function ScreenArticlesBySource(props) {
 
         </div>
     );
+  }
   
 }
 

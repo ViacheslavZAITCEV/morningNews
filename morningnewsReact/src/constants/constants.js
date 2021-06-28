@@ -98,40 +98,66 @@ export const categorys = [
 
 export const language = [
   {
-    category: 'general',
-    categoryName: 'general',
-    img: '/images/general.png',
+    language: '',
+    languageName: 'All languages',
+    img: '/images/all.png',
   },
   {
-    category: 'entertainment',
-    categoryName: 'entertainment',
-    img: '/images/entertainment.png',
+    language: 'en',
+    languageName: 'English',
+    img: '/images/en.png',
   },
   {
-    category: 'business',
-    categoryName: 'business',
-    img: '/images/business.png',
+    language: 'fr',
+    languageName: 'French',
+    img: '/images/fr.png',
   },
   {
-    category: 'health',
-    categoryName: 'health',
-    img: '/images/health.png',
+    language: 'ru',
+    languageName: 'Russian',
+    img: '/images/ru.png',
   },
   {
-    category: 'science',
-    categoryName: 'science',
-    img: '/images/science.png',
+    language: 'de',
+    languageName: 'Deutch',
+    img: '/images/de.png',
   },
   {
-    category: 'sports',
-    categoryName: 'sports',
-    img: '/images/sports.png',
+    language: 'it',
+    languageName: 'Italian',
+    img: '/images/it.png',
   },
   {
-    category: 'technology',
-    categoryName: 'technology',
-    img: '/images/technology.png',
+    language: 'pt',
+    languageName: 'Portugaise',
+    img: '/images/pt.png',
   },
+  {
+    language: 'es',
+    languageName: 'Espagnol',
+    img: '/images/es.png',
+  },
+  {
+    language: 'he',
+    languageName: 'Hébreu',
+    img: '/images/he.png',
+  },
+  {
+    language: 'pnlt',
+    languageName: 'Néerlandais',
+    img: '/images/nl.png',
+  },
+  {
+    language: 'no',
+    languageName: 'Norvégien',
+    img: '/images/no.png',
+  },
+  {
+    language: 'se',
+    languageName: 'Suedois',
+    img: '/images/se.png',
+  },
+
 ];
 
 

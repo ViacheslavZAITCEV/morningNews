@@ -165,12 +165,7 @@ function ScreenSource(props) {
         <Menu.Item onClick={() => majLang('language=se')}>
           Suedois
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=ud')}>
-          Néerlandais
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=zh')}>
-          Norvégien
-        </Menu.Item>
+
       </Menu>
     );
   }
