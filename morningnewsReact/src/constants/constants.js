@@ -96,12 +96,7 @@ export const categorys = [
 
 
 
-export const language = [
-  {
-    language: '',
-    languageName: 'All languages',
-    img: '/images/all.png',
-  },
+export const languages = [
   {
     language: 'en',
     languageName: 'English',

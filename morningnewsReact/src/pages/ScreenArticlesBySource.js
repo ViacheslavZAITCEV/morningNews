@@ -52,14 +52,11 @@ function ScreenArticlesBySource(props) {
           body : `fromFront=${fromFront}`
         }
 
-        // const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&${apiKey}`);
         console.log('requet=', requet);
         const data = await fetch('/getArticles', requet)
         const body = await data.json()
 
         if (body.status){
-          // console.log ('findArticles from API');
-          // console.log('body=', body)
           setArticleList(body.articles) 
 
         }else{
@@ -86,9 +83,7 @@ function ScreenArticlesBySource(props) {
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body : `token=${token}&title=${article.title}&description=${article.description}&urlToImage=${article.urlToImage}&content=${article.content}&url=${article.url}`
     };
-    // await fetch("/addArticle", requet);
     await fetch("/addArticle", requet);
-    // console.log('addArt:icleToBD, route= /addArticle  reponseBE=', reponseBE);
   }
 
   const toLink = (url)=>{
@@ -106,7 +101,7 @@ function ScreenArticlesBySource(props) {
   return (
       <div>
           
-              <Nav/>
+              <Nav  source />
 
               <div className="Banner"/>
 

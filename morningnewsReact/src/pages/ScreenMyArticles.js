@@ -135,7 +135,7 @@ function ScreenMyArticles(props) {
 
     return (
       <div>
-        <Nav/>
+        <Nav  source />
         <div className="Banner"/>
         <div className="Card">
         {likes}

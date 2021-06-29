@@ -3,12 +3,10 @@ import {Link} from 'react-router-dom'
 import '../App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from '../components/Nav'
+import DropDownButton from '../components/DropDownButton'
 import { connect } from 'react-redux';
 
-import {countrys, categorys} from '../constants/constants'
-
-// import apikey from './apikey';
-
+import {countrys, categorys, languages } from '../constants/constants'
 
 
 function ScreenSource(props) {
@@ -72,17 +70,12 @@ function ScreenSource(props) {
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body : body
     };
-    // console.log('updateBD, route=', route, ',  body=', body);
     
     try {
       await fetch(route, requet);
-      // var reponseBE = await fetch(route, requet);
-      // console.log('BD=', reponseBD);
     } catch (error) {
-      console.log(error);
-      
+      console.log(error);      
     }
-    // console.log('updateBD, route = ', route, '  reponseBE=', reponseBE);
   }
 
 
@@ -118,58 +111,23 @@ function ScreenSource(props) {
     updateBD('/setCategory', category);
   }
 
-    
-  
 
-
-
-
-
-
-  function menuLang() {
+  const menuLang = ()=>{
     return (
       <Menu>
         <Menu.Item onClick={() => majLang('')}>
           All languages
         </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=en')}>
-          English
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=fr')}>
-          French
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=ru')}>
-          Russian
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=de')}>
-          Deutch
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=it')}>
-          Italian
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=pt')}>
-          Portugaise
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=es')}>
-          Espagnol
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=he')}>
-          Hébreu
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=nl')}>
-          Néerlandais
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=no')}>
-          Norvégien
-        </Menu.Item>
-        <Menu.Item onClick={() => majLang('language=se')}>
-          Suedois
-        </Menu.Item>
-
+        { languages.map( (l, i) =>{ 
+          return (
+            <Menu.Item key={i} onClick={() => majLang(`language=${l.language}`)} >
+              {l.languageName}
+            </Menu.Item>
+          )
+        })}
       </Menu>
-    );
+    )
   }
-
 
 
   const menuCountry = ()=>{
@@ -236,60 +194,17 @@ function ScreenSource(props) {
 
     return (
       <div>
-        <Nav/> 
-
+        <Nav
+        lang={lang}
+        menuLang={menuLang}
+        country={country}
+        menuCountry={menuCountry}
+        category={category}
+        menuCategory={menuCategory}
         
-          <Col className='sourceMenu'>
+        /> 
 
-            <Dropdown overlay={menuLang} placement="bottomLeft">
-              <Button >
-                Language - {  
-                  lang.substring(9,11) ?
-                  lang.substring(9,11) :
-                  <span> All </span>
-                } &nbsp;
-              </Button>
-            </Dropdown>
 
-            <Dropdown overlay={menuCountry} placement="bottomCenter">
-              <Button>
-                Country's source - {  
-                  country.substring(8,10) ?
-                  country.substring(8,10) :
-                  <span> All </span>
-                } &nbsp;
-                <img 
-                  className="logos"
-                  alt='Country'
-                  src={ 
-                    country.substring(8,10) ?
-                    `/images/${country.substring(8,10)}.png` :
-                    `/images/all.png` 
-                  }
-                />
-              </Button>
-            </Dropdown>
-
-            <Dropdown overlay={menuCategory} placement="bottomRight">
-              <Button>
-                Category - {
-                  category.substring(9,category.length) ?
-                  category.substring(9,category.length) : 
-                  <span> All </span>
-                } &nbsp;
-                <img 
-                  className="logos"
-                  alt='Category'
-                  src={ 
-                    category.substring(9,category.length) ?
-                    `/images/${category.substring(9,category.length)}.png` :
-                    `/images/allCategorys.png` 
-                  }
-                />
-              </Button>
-            </Dropdown>
-
-          </Col>
           <Col>
             <div className="HomeThemes Banner">
             <List
