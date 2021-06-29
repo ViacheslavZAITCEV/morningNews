@@ -122,19 +122,19 @@ function ScreenArticlesBySource(props) {
                     flexDirection: 'column',
                     justifyContent:'space-between' }}
                     cover={
-                      // <>
-                      //   <a
-                      //   style={{ widthMax: 300}}
-                      //   href={article.url}
-                      //   target='_blank'
-                      //   alt={article.title}
-                      //   >
-                      <img 
-                      src={article.urlToImage} 
-                      onClick={ ()=> { toLink(article.url) }}
-                      />
-                      //   </a>
-                      // </>
+                      <>
+                        <a
+                        href={article.url}
+                        target='_blank'
+                        alt={article.title}
+                        >
+                          <img 
+                          style={{ width: 300 }}
+                          src={article.urlToImage} 
+                          // onClick={ ()=> { toLink(article.url) }}
+                          />
+                        </a>
+                      </>
                     }
                     actions={[
                       <div 
@@ -149,13 +149,16 @@ function ScreenArticlesBySource(props) {
                     <Meta
                       title={article.title}
                       description={
+                        <>
+                        {article.description}
                         <a
                         href={article.url}
                         target='_blank'
                         alt={article.title}
                         >
-                          {article.description}
+                          Read more
                         </a>
+                          </>
                       }
                     />
 
