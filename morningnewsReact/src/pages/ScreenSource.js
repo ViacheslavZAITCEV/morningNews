@@ -4,6 +4,7 @@ import '../App.css';
 import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
 import Nav from '../components/Nav'
 import DropDownButton from '../components/DropDownButton'
+import DropdownMenu from '../components/DropdownMenu'
 import { connect } from 'react-redux';
 
 import {countrys, categorys, languages } from '../constants/constants'
@@ -114,83 +115,42 @@ function ScreenSource(props) {
 
   const menuLang = ()=>{
     return (
-      <Menu>
-        <Menu.Item onClick={() => majLang('')}>
-          All languages
-        </Menu.Item>
-        { languages.map( (l, i) =>{ 
-          return (
-            <Menu.Item key={i} onClick={() => majLang(`language=${l.language}`)} >
-              {l.languageName}
-            </Menu.Item>
-          )
-        })}
-      </Menu>
+      <DropdownMenu
+      maj = {majLang}
+      list = {languages}
+      proprety = 'language'
+      name = "languageName"
+      />
     )
   }
 
 
   const menuCountry = ()=>{
     return (
-      <Menu>
-        <Menu.Item onClick={() => majCountry('')}>
-          All country's sources
-        <img style={{height: '3vh' }} src={ `./images/all.png`} />
-        </Menu.Item>
-        { countrys.map( (c, i) =>{ 
-          return (
-            <Menu.Item key={i} onClick={() => majCountry(`country=${c.country}`)} >
-              <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-              }}  >
-              <span className="drapeau">
-                <img className="logos" src={ `./images/${c.country}.png`}x />
-              </span>
-              <span justifyContent="center">
-                {c.countryName}
-              </span>
-              </div>
-            </Menu.Item>
-          )
-        })}
-      </Menu>
+      <DropdownMenu
+      maj = {majCountry}
+      list = {countrys}
+      proprety = 'country'
+      name = 'countryName'
+      />
     )
   }
+
   
-  
-  
-  function menuCategory (){
+
+
+  const menuCategory = ()=>{
     return (
-      <Menu>
-        <Menu.Item onClick={() => majCategory('')}>
-          All categorys
-        </Menu.Item>
-        {
-          categorys.map ((c, i) =>{
-            return (
-              <Menu.Item style={{justifyContent: 'space-between'}} key={i} onClick={() => majCategory(`category=${c.category}`)}>
+      <DropdownMenu
+      maj = {majCategory}
+      list = {categorys}
+      proprety = 'category'
+      name = 'categoryName'
+      />
+    )
+  }
 
-                  <img style={{width: '2vw', paddingRight: '10px'}} src={c.img} />
-                {c.categoryName}
-              </Menu.Item>
-            )
-          })
-        }
-      </Menu>
-    );
-  };
-
-    
-
-
-
-
-
-
-
-
+  
 
     return (
       <div>

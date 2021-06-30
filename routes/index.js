@@ -171,11 +171,14 @@ router.post ('/fetch', async function (req, res, next){
   console.log ('req.body = ', req.body);
   var fromFrontRAW = req.body.fromFront;
   var fromFront = JSON.parse(fromFrontRAW);
-  // console.log ('fromFront = ', fromFront);
+  console.log ('fromFront = ', fromFront);
   var response = {status : false};
   
-  if (fromFront.lang) {
-    fromFront.lang = fromFront.lang + '&'
+  if (fromFront.lang === 'All') {
+    fromFront.lang = ''
+  }
+    else{   
+    fromFront.lang = 'language=' + fromFront.lang + '&'
   }
   
   if (fromFront.country) {
@@ -186,6 +189,7 @@ router.post ('/fetch', async function (req, res, next){
     fromFront.category = fromFront.category + '&'
   }
   
+  console.log ('fromFront after = ', fromFront);
   try {
 
     var data = await request('GET', `${fromFront.url}${fromFront.lang}${fromFront.country}${fromFront.category}apiKey=${apiKey}`);

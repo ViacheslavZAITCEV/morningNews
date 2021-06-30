@@ -1,61 +1,84 @@
 export const countrys = [
   {
+    country: 'All',
+    countryName: "All country's sources",
+    img: '/images/all.png',
+  },
+  {
     country: 'us',
     countryName: 'United States',
+    img: '/images/us.png',
   },
   {
     country: 'fr',
     countryName: 'France',
+    img: '/images/fr.png',
   },
   {
     country: 'ru',
     countryName: 'Russia',
+    img: '/images/ru.png',
   },
   {
     country: 'de',
     countryName: 'Deutchland',
+    img: '/images/de.png',
   },
   {
     country: 'it',
     countryName: 'Italy',
+    img: '/images/it.png',
   },
   {
     country: 'br',
     countryName: 'Brasil',
+    img: '/images/br.png',
   },
   {
     country: 'ie',
     countryName: 'Ireland',
+    img: '/images/ie.png',
   },
   {
     country: 'in',
     countryName: 'India',
+    img: '/images/in.png',
   },
   {
     country: 'ar',
     countryName: 'Argentine',
+    img: '/images/ar.png',
   },
   {
     country: 'ca',
     countryName: 'Canada',
+    img: '/images/ca.png',
   },
   {
     country: 'nl',
     countryName: 'Netherlands',
+    img: '/images/nl.png',
   },
   {
     country: 'no',
     countryName: 'Norway',
+    img: '/images/no.png',
   },
   {
     country: 'se',
     countryName: 'Sweden',
+    img: '/images/se.png',
   },
 ];
 
 
 
 export const categorys = [
+  {
+    category: 'All',
+    categoryName: 'All categorys',
+    img: '/images/allCategorys.png',
+  },
   {
     category: 'general',
     categoryName: 'general',
@@ -98,61 +121,53 @@ export const categorys = [
 
 export const languages = [
   {
+    language: 'All',
+    languageName: 'All languages',
+  },
+  {
     language: 'en',
     languageName: 'English',
-    img: '/images/en.png',
   },
   {
     language: 'fr',
     languageName: 'French',
-    img: '/images/fr.png',
   },
   {
     language: 'ru',
     languageName: 'Russian',
-    img: '/images/ru.png',
   },
   {
     language: 'de',
     languageName: 'Deutch',
-    img: '/images/de.png',
   },
   {
     language: 'it',
     languageName: 'Italian',
-    img: '/images/it.png',
   },
   {
     language: 'pt',
     languageName: 'Portugaise',
-    img: '/images/pt.png',
   },
   {
     language: 'es',
     languageName: 'Espagnol',
-    img: '/images/es.png',
   },
   {
     language: 'he',
     languageName: 'Hébreu',
-    img: '/images/he.png',
   },
   {
     language: 'pnlt',
     languageName: 'Néerlandais',
-    img: '/images/nl.png',
   },
   {
     language: 'no',
     languageName: 'Norvégien',
-    img: '/images/no.png',
   },
   {
     language: 'se',
     languageName: 'Suedois',
-    img: '/images/se.png',
   },
-
 ];
 
 

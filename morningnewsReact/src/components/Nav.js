@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import '../App.css';
-import { Menu } from 'antd'
+import { Menu, Row } from 'antd'
 import DropDownButton from '../components/DropDownButton'
-
+import { menuLang, menuCountry, menuCategory } from './DropdownMenu'
 import { connect } from 'react-redux';
 
 
@@ -18,12 +18,17 @@ function Nav(props) {
 
   const {menuLang, lang, country, menuCountry, category, menuCategory, source} = props
 
-  const dropdownStyle= {
+  const navBarStyle= {
+    height: '7vh',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     background: '#001529',
     color: '#fff',
-    borderRadius: 15,
-    margin: 15,
+    "&:hover":{
+      background: '#fff',
+    }
   }
+
   const dropdownHower = {
     background: '#002944',
   }
@@ -33,62 +38,62 @@ function Nav(props) {
     paddingBottom: 0,
     paddingTop: 0,  
     margin: 0,
-    borderRadius : 15 
+    border : 2,
+    borderRadius : 15
   }
 
 
   return (
-    <>
-      <Menu style={{ justifyContent: 'space-around'}} mode="horizontal" theme="dark">
-
+    <Row style={navBarStyle}>
         {source &&
-          <Menu.Item key="home" style={dropMenuStyle} >
+          <div key="home" style={dropMenuStyle} >
             <Link to="/">
-              <div type="home" />
               Sources
             </Link>
-          </Menu.Item>
+          </div>
         }
 
         {menuLang && 
-          <Menu.Item key="langMenu" style={dropMenuStyle}>
-            <DropDownButton title='Language ' titleItem={lang} dropdown={menuLang}
-             dropdownStyle={dropdownStyle}
+          <span key="langMenu" style={dropMenuStyle}>
+            <DropDownButton 
+            title='Language ' 
+            titleItem={lang} 
+            dropdown={menuLang}
             /> 
-          </Menu.Item>
+          </span>
         }
+
         {menuCountry && 
-          <Menu.Item key="menuCountry" style={dropMenuStyle}>
-            <DropDownButton title="Country's source " titleItem={country} dropdown={menuCountry} image='all' 
-            dropdownStyle={dropdownStyle}
+          <span key="menuCountry" style={dropMenuStyle}>
+            <DropDownButton 
+            title="Country's source " 
+            titleItem={country} 
+            dropdown={menuCountry} 
+            image='all' 
             />
-          </Menu.Item>
+          </span>
         }
+        
         {menuCategory && 
-          <Menu.Item key="menuCategory" style={dropMenuStyle}>
-            <DropDownButton title="Category " titleItem={category} dropdown={menuCategory} image='allCategorys'
-            dropdownStyle={dropdownStyle}
+          <span key="menuCategory" style={dropMenuStyle}>
+            <DropDownButton 
+            title="Category " 
+            titleItem={category} 
+            dropdown={menuCategory} 
+            image='allCategorys'
             />
-          </Menu.Item>
+          </span>
         }
+            <Link to="/screenmyarticles">
+              <div type="read" />
+              My Articles
+            </Link>
+            <Link to="/login">
+              <div type="logout" />
+              {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
+            </Link>
 
-        <Menu.Item key="articles" style={dropMenuStyle}>
-          <Link to="/screenmyarticles">
-            <div type="read" />
-            My Articles
-          </Link>
-        </Menu.Item>
-
-        <Menu.Item key="login" style={dropMenuStyle}>
-          <Link to="/login">
-            <div type="logout" />
-            {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
-          </Link>
-        </Menu.Item>
-
-
-      </Menu>
-    </>
+    </Row>
   );
 }
 
