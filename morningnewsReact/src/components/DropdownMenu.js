@@ -6,10 +6,16 @@ const DropdownMenu = (props)=>{
 
   const { maj, list, proprety, name } = props
 
-  console.log('list', list)
+
+  const dropMenuStyle = {
+    borderRadius: 15,
+  }
+
 
     return (
-      <Menu>
+      <Menu
+      style={dropMenuStyle}
+      >
         { list.map( (item, i) =>{
           return (
             <Menu.Item key={i} onClick={() => maj(item[proprety])} >

@@ -1,28 +1,45 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import '../App.css';
-import { List, Avatar, Menu, Dropdown, Button, Row, Col } from 'antd';
-import Nav from '../components/Nav'
-import DropDownButton from '../components/DropDownButton'
-import DropdownMenu from '../components/DropdownMenu'
 import { connect } from 'react-redux';
-
+import { List, Avatar, Col } from 'antd';
+import Nav from '../components/Nav'
+import DropdownMenu from '../components/DropdownMenu'
 import {countrys, categorys, languages } from '../constants/constants'
+
+import background from './img/background.jpg'
 
 
 function ScreenSource(props) {
   
+  const banner = {
+    backgroundImage: `url(${background})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'noRepeat',
+    backgroundSize: 'cover',
+    opacity: 0.9,
+  }
+  const listSources = {
+    height: '91vh',
+    marginLeft: 50,
+    marginRight: 50,
+    marginTop: 20,
+  }
+  const listItemStyles = {
+    background: '#fff',
+    opacity: 0.8,
+    borderRadius: 15,
+    marginTop: 5,
+  }
+
+
   const [lang, setLang] = useState(props.lang);
   const [country, setCountry] = useState(props.country);
   const [category, setCategory] = useState(props.category);
   const [sourceList, setSourceList] = useState([]);
   
   useEffect(()=>{
-    chargeNews(
-      lang ? lang : '', 
-      country ? country : '', 
-      category ? category : ''
-    );
+    chargeNews( lang, country, category );
   }, [lang, country, category]);
   
   async function chargeNews(lang, country, category){
@@ -165,14 +182,16 @@ function ScreenSource(props) {
         /> 
 
 
-          <Col>
-            <div className="HomeThemes Banner">
+        <Col style={banner}>
             <List
+              style={listSources}
               itemLayout="horizontal"
               dataSource={sourceList}
               renderItem={source => (
                 
-                <List.Item>
+                <List.Item
+                style={listItemStyles}
+                >
                   <List.Item.Meta
                     avatar={<Avatar src={`/images/${source.category}.png`} />}
                     title={<Link to={`/screenarticlesbysource/${source.id}`}>{source.name}</Link>}
@@ -182,7 +201,6 @@ function ScreenSource(props) {
 
               )}
             />
-          </div>
         </Col>
                   
 

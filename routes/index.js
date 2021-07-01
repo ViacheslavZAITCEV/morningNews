@@ -181,12 +181,16 @@ router.post ('/fetch', async function (req, res, next){
     fromFront.lang = 'language=' + fromFront.lang + '&'
   }
   
-  if (fromFront.country) {
-    fromFront.country = fromFront.country + '&'
+  if (fromFront.country === 'All') {
+    fromFront.country = ''
+  }else{
+    fromFront.country = 'country=' + fromFront.country + '&'
   }
   
-  if (fromFront.category) {
-    fromFront.category = fromFront.category + '&'
+  if (fromFront.category === 'All') {
+    fromFront.category = ''
+  }else{
+    fromFront.category = 'category=' + fromFront.category + '&'
   }
   
   console.log ('fromFront after = ', fromFront);
