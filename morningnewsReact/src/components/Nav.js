@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import '../App.css';
-import { Menu, Row } from 'antd'
+import { Menu, Row, Col } from 'antd'
 import DropDownButton from '../components/DropDownButton'
-import { menuLang, menuCountry, menuCategory } from './DropdownMenu'
 import { connect } from 'react-redux';
 
+import { COLOR_SLATE, COLOR_COFFEE } from '../constants'
 
 
 function mapStateToProps(state){
@@ -19,19 +19,12 @@ function Nav(props) {
   const {menuLang, lang, country, menuCountry, category, menuCategory, source} = props
 
   const navBarStyle= {
-    height: '7vh',
+    padding: 15,
     justifyContent: 'space-around',
     alignItems: 'center',
-    background: '#001529',
-    color: '#fff',
-    "&:hover":{
-      background: '#fff',
-    }
+    background: COLOR_SLATE,
   }
-
-  const dropdownHower = {
-    background: '#002944',
-  }
+  
   const dropMenuStyle = { 
     paddingRight: 7,
     paddingLeft: 7, 
@@ -39,7 +32,11 @@ function Nav(props) {
     paddingTop: 0,  
     margin: 0,
     border : 2,
-    borderRadius : 15
+    borderRadius : 15,
+    color: COLOR_COFFEE,
+    "&:hover":{
+      background: '#fff',
+    }
   }
 
 
@@ -85,11 +82,9 @@ function Nav(props) {
           </span>
         }
             <Link to="/screenmyarticles">
-              <div type="read" />
               My Articles
             </Link>
             <Link to="/login">
-              <div type="logout" />
               {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
             </Link>
 

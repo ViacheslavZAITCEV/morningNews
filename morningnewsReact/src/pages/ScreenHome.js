@@ -6,13 +6,51 @@ import {Redirect} from 'react-router-dom'
 import { useEffect } from 'react';
 
 import Nav from '../components/Nav'
-
+import background from './img/background.jpg'
+import { COLOR_SLATE, COLOR_COFFEE } from '../constants'
 
 
 
 
 
 function ScreenHome(props) {
+
+  const LoginPage = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    backgroundImage: `url(${background})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'noRepeat',
+    backgroundSize: 'cover',
+    // opacity: 0.7,
+    }
+
+    const Sign = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: 15,
+      borderRadius: 15,
+      borderColor: 'white',
+      backgroundColor: 'rgba(148, 83, 9, 0.7)',
+      margin: 40,
+  }
+  const loginInput = {
+    margin: 15,
+    width: 400,
+  }
+
+  const btnStyle = {
+    backgroundColor: COLOR_COFFEE,
+    color: 'white',
+    borderRadius: 15,
+    borderColor: 'white',
+    borderWight: 2,
+  }
 
 
   const [login, setLogin] = useState ('');
@@ -107,71 +145,66 @@ function ScreenHome(props) {
   return (
     <div>
       <Nav  source />
-      <div className="Login-page" >
+      <div style={LoginPage} >
+
+        {/* SIGN-IN */}
+        <div style={Sign}>
+
+          <Input 
+          onChange={ (e)=> setLogin(e.target.value)} 
+          style={loginInput} 
+          placeholder='your login' 
+          value={login}
+          />
+
+          <Input.Password 
+          onChange={ (e)=> setPass(e.target.value)} 
+          style={loginInput} 
+          placeholder='your password' 
+          value = {pass} 
+          />
+
+          <Button 
+          onClick={ ()=> loginFE() } 
+          style={btnStyle}
+          >
+            Sign-in
+          </Button>
+
+          <p>{errSignIn}</p>
+        </div>
 
 
-          {/* SIGN-IN */}
-          <div className="Sign">
+        {/* SIGN-UP */}
+        <div style={Sign}>
 
-                  <Input 
-                  onChange={ (e)=> setLogin(e.target.value)} 
-                  className="Login-input" 
-                  placeholder='your login' 
-                  value={login}
-                  />
+          <Input 
+          onChange={ (e)=> setLoginInscr(e.target.value)} 
+          style={loginInput} 
+          placeholder={loginInscr} 
+          />
 
-                  <Input.Password 
-                  onChange={ (e)=> setPass(e.target.value)} 
-                  className="Login-input" 
-                  placeholder='your password' 
-                  value = {pass} 
-                  />
+          <Input.Password 
+          onChange={ (e)=> setPassInscr(e.target.value)} 
+          style={loginInput} 
+          placeholder={passInscr} 
+          />
 
-            <Button 
-            onClick={ ()=> loginFE() } 
-            style={{width:'80px'}} 
-            type="primary"
-            >
-              Sign-in
-            </Button>
+          <Input.Password 
+          onChange={ (e)=> setPassInscr2(e.target.value)} 
+          style={loginInput} 
+          placeholder={passInscr2} 
+          />
 
-            <p>{errSignIn}</p>
+          <Button 
+          onClick={ ()=> inscrire() } 
+          style={btnStyle} 
+          >
+            Sign-up
+          </Button>
 
-          </div>
-
-
-
-          {/* SIGN-UP */}
-          <div className="Sign">
-
-                  <Input 
-                  onChange={ (e)=> setLoginInscr(e.target.value)} 
-                  className="Login-input" 
-                  placeholder={loginInscr} 
-                  />
-
-                  <Input.Password 
-                  onChange={ (e)=> setPassInscr(e.target.value)} 
-                  className="Login-input" 
-                  placeholder={passInscr} 
-                  />
-
-                  <Input.Password 
-                  onChange={ (e)=> setPassInscr2(e.target.value)} 
-                  className="Login-input" 
-                  placeholder={passInscr2} 
-                  />
-
-                  <Button 
-                  onClick={ ()=> inscrire() } 
-                  style={{width:'80px'}} 
-                  type="primary"
-                  >
-                    Sign-up
-                  </Button>
-
-            <p>{errSignUp}</p>
-          </div>
+          <p>{errSignUp}</p>
+        </div>
       </div>
     </div>
   );

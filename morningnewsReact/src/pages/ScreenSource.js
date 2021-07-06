@@ -5,7 +5,15 @@ import { connect } from 'react-redux';
 import { List, Avatar, Col } from 'antd';
 import Nav from '../components/Nav'
 import DropdownMenu from '../components/DropdownMenu'
-import {countrys, categorys, languages } from '../constants/constants'
+import {
+  countrys, 
+  categorys, 
+  languages,
+  COLOR_SLATE,
+  COLOR_CERAMIC,
+  COLOR_LATTE,
+  COLOR_COFFEE
+} from '../constants/constants'
 
 import background from './img/background.jpg'
 
@@ -13,6 +21,7 @@ import background from './img/background.jpg'
 function ScreenSource(props) {
   
   const banner = {
+    // position: 'static',
     backgroundImage: `url(${background})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'noRepeat',
@@ -20,7 +29,7 @@ function ScreenSource(props) {
     opacity: 0.9,
   }
   const listSources = {
-    height: '91vh',
+    height: '85vh',
     marginLeft: 50,
     marginRight: 50,
     marginTop: 20,
@@ -59,22 +68,17 @@ function ScreenSource(props) {
         headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
         body : `fromFront=${fromFront}`
       }
-      console.log('requet');
-      // const data = await fetch(`https://newsapi.org/v2/sources?${lang}${country}${category}${apiKey}`)
       const data = await fetch('/fetch', requet);
       const body = await data.json();
-      console.log('etape2, body=', body);
 
       if( body.status ){
-        console.log('etape2, body.response=', body.response);
         setSourceList(body.response);
-        // console.log('body.sources=', body.sources);
       }else{
-        console.log('error BackEnd=', body.error);
+        console.log('error! retour BackEnd=', body.error);
       }
       
     } catch (error) {
-      console.log('error fetch=', error);
+      console.error('error! catch=', error);
       
     }
   }
@@ -178,33 +182,33 @@ function ScreenSource(props) {
         menuCountry={menuCountry}
         category={category}
         menuCategory={menuCategory}
-        
         /> 
 
+        <div 
+        style={banner}
+        >
+          <List
+            style={listSources}
+            itemLayout="horizontal"
+            dataSource={sourceList}
+            renderItem={source => (
+              
+              <List.Item
+              style={listItemStyles}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={`/images/${source.category}.png`} />}
+                  title={<Link to={`/screenarticlesbysource/${source.id}`}>{source.name}</Link>}
+                  description={source.description}
+                  />
+              </List.Item>
 
-        <Col style={banner}>
-            <List
-              style={listSources}
-              itemLayout="horizontal"
-              dataSource={sourceList}
-              renderItem={source => (
-                
-                <List.Item
-                style={listItemStyles}
-                >
-                  <List.Item.Meta
-                    avatar={<Avatar src={`/images/${source.category}.png`} />}
-                    title={<Link to={`/screenarticlesbysource/${source.id}`}>{source.name}</Link>}
-                    description={source.description}
-                    />
-                </List.Item>
-
-              )}
-            />
-        </Col>
+          )}
+          />
+        </div>
                   
 
-        </div>
+      </div>
     );
   }
 
