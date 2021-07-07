@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import '../App.css';
 import {connect} from 'react-redux';
-import {Input,Button} from 'antd';
+import {Col, Row, Input,Button} from 'antd';
 import {Redirect} from 'react-router-dom'
 import { useEffect } from 'react';
 
 import Nav from '../components/Nav'
 import background from './img/background.jpg'
-import { COLOR_SLATE, COLOR_COFFEE } from '../constants'
+import { COLOR_LATTE, COLOR_COFFEE } from '../constants'
 
 
 
@@ -15,17 +15,23 @@ import { COLOR_SLATE, COLOR_COFFEE } from '../constants'
 
 function ScreenHome(props) {
 
-  const LoginPage = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+  const  backImage = {
     height: '100vh',
     backgroundImage: `url(${background})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'noRepeat',
     backgroundSize: 'cover',
     // opacity: 0.7,
+    }
+
+  const LoginPage = {
+    // height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
+    alignSelf: 'center',
+
     }
 
     const Sign = {
@@ -41,7 +47,10 @@ function ScreenHome(props) {
   }
   const loginInput = {
     margin: 15,
-    width: 400,
+    width: '80%',
+    borderRadius: 15,
+    borderColor: COLOR_LATTE,
+
   }
 
   const btnStyle = {
@@ -50,6 +59,10 @@ function ScreenHome(props) {
     borderRadius: 15,
     borderColor: 'white',
     borderWight: 2,
+  }
+
+  const errStyle = {
+    color: 'red',
   }
 
 
@@ -143,18 +156,19 @@ function ScreenHome(props) {
   }
 
   return (
-    <div>
+    <div style={backImage}>
       <Nav  source />
-      <div style={LoginPage} >
+      <Row style={LoginPage} >
 
         {/* SIGN-IN */}
-        <div style={Sign}>
+        <Col xs={20} md={6} style={Sign}>
 
           <Input 
           onChange={ (e)=> setLogin(e.target.value)} 
           style={loginInput} 
           placeholder='your login' 
           value={login}
+          // onPressEnter={loginFE()}
           />
 
           <Input.Password 
@@ -162,50 +176,54 @@ function ScreenHome(props) {
           style={loginInput} 
           placeholder='your password' 
           value = {pass} 
+          // onPressEnter={loginFE()}
           />
 
           <Button 
           onClick={ ()=> loginFE() } 
           style={btnStyle}
           >
-            Sign-in
+            Sign in
           </Button>
 
           <p>{errSignIn}</p>
-        </div>
+        </Col>
 
 
         {/* SIGN-UP */}
-        <div style={Sign}>
+        <Col xs={20} md={6} style={Sign}>
 
           <Input 
           onChange={ (e)=> setLoginInscr(e.target.value)} 
           style={loginInput} 
           placeholder={loginInscr} 
+          // onPressEnter={inscrire()}
           />
 
           <Input.Password 
           onChange={ (e)=> setPassInscr(e.target.value)} 
           style={loginInput} 
           placeholder={passInscr} 
+          // onPressEnter={inscrire()}
           />
 
           <Input.Password 
           onChange={ (e)=> setPassInscr2(e.target.value)} 
           style={loginInput} 
           placeholder={passInscr2} 
+          // onPressEnter={inscrire()}
           />
 
           <Button 
           onClick={ ()=> inscrire() } 
           style={btnStyle} 
           >
-            Sign-up
+            Sign up
           </Button>
 
-          <p>{errSignUp}</p>
-        </div>
-      </div>
+          <p style={errStyle}>{errSignUp}</p>
+        </Col>
+      </Row>
     </div>
   );
   

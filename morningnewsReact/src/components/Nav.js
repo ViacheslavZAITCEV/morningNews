@@ -1,11 +1,12 @@
 import React from 'react';
+import Links from './Links'
 import {Link} from 'react-router-dom'
 import '../App.css';
 import { Menu, Row, Col } from 'antd'
 import DropDownButton from '../components/DropDownButton'
 import { connect } from 'react-redux';
 
-import { COLOR_SLATE, COLOR_COFFEE } from '../constants'
+import { COLOR_SLATE, COLOR_LATTE, COLOR_COFFEE } from '../constants'
 
 
 function mapStateToProps(state){
@@ -23,6 +24,25 @@ function Nav(props) {
     justifyContent: 'space-around',
     alignItems: 'center',
     background: COLOR_SLATE,
+  }
+  
+  const linkOutStyle = { 
+    paddingRight: 7,
+    paddingLeft: 7, 
+    paddingBottom: 0,
+    paddingTop: 0,  
+    margin: 0,
+    color:  '#fff',
+
+  }
+  
+  const linkInStyle = { 
+    paddingRight: 7,
+    paddingLeft: 7, 
+    paddingBottom: 0,
+    paddingTop: 0,  
+    margin: 0,
+    color: COLOR_LATTE,
   }
   
   const dropMenuStyle = { 
@@ -43,10 +63,10 @@ function Nav(props) {
   return (
     <Row style={navBarStyle}>
         {source &&
-          <div key="home" style={dropMenuStyle} >
-            <Link to="/">
+          <div key="home"  >
+            <Links to="/" styleOut={linkOutStyle} styleIn={linkInStyle} >
               Sources
-            </Link>
+            </Links>
           </div>
         }
 
@@ -81,12 +101,12 @@ function Nav(props) {
             />
           </span>
         }
-            <Link to="/screenmyarticles">
+            <Links to="/screenmyarticles"  styleOut={linkOutStyle} styleIn={linkInStyle} >
               My Articles
-            </Link>
-            <Link to="/login">
+            </Links>
+            <Links to="/login"  styleOut={linkOutStyle} styleIn={linkInStyle} >
               {props.user.token === 'vide' ? 'Sign In / Sign Up' : 'Logout'}
-            </Link>
+            </Links>
 
     </Row>
   );
