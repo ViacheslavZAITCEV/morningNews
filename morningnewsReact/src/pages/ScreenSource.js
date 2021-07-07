@@ -139,35 +139,38 @@ function ScreenSource(props) {
       <DropdownMenu
       maj = {majLang}
       list = {languages}
+      selected = {lang}
       proprety = 'language'
       name = "languageName"
       />
-    )
-  }
-
-
-  const menuCountry = ()=>{
-    return (
-      <DropdownMenu
-      maj = {majCountry}
-      list = {countrys}
-      proprety = 'country'
-      name = 'countryName'
-      />
-    )
-  }
-
-  
-
-
-  const menuCategory = ()=>{
-    return (
-      <DropdownMenu
-      maj = {majCategory}
-      list = {categorys}
-      proprety = 'category'
-      name = 'categoryName'
-      />
+      )
+    }
+    
+    
+    const menuCountry = ()=>{
+      return (
+        <DropdownMenu
+        maj = {majCountry}
+        list = {countrys}
+        selected = {country}
+        proprety = 'country'
+        name = 'countryName'
+        />
+        )
+      }
+      
+      
+      
+      
+      const menuCategory = ()=>{
+        return (
+          <DropdownMenu
+          maj = {majCategory}
+          list = {categorys}
+          selected = {category}
+          proprety = 'category'
+          name = 'categoryName'
+          />
     )
   }
 
@@ -185,7 +188,7 @@ function ScreenSource(props) {
         /> 
 
         <div 
-        style={banner}
+        // style={banner}
         >
           <List
             style={listSources}

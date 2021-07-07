@@ -1,7 +1,7 @@
 import React from 'react'
 import { Menu } from 'antd';
-
-import { COLOR_SLATE, COLOR_LATTE, COLOR_COFFEE } from '../constants'
+import MenuItem from './MenuItem'
+import { COLOR_SLATE, COLOR_CERAMIC, COLOR_LATTE, COLOR_COFFEE } from '../constants'
 
 
 
@@ -10,18 +10,34 @@ const dropMenuStyle = {
   borderColor: '#fff',
   borderRadius: 15,
   backgroundColor: COLOR_SLATE,
-  color: '#fff'
+  color: '#fff',
+  // margin: 10,
+
 }
 
-const menuItemStyle={
-
-}  
 
 
 const DropdownMenu = (props)=>{
-
-  const { maj, list, proprety, name } = props
   
+  const { maj, list, proprety, name, selected } = props
+  
+  const menuItemInStyle={
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    color: COLOR_LATTE,
+    // margin: 10,
+  }  
+  const menuItemOutStyle={
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    color: '#fff',
+    // margin: 10,
+  }  
+  console.log('selected=', selected)
 
     return (
       <Menu
@@ -29,23 +45,20 @@ const DropdownMenu = (props)=>{
       >
         { list.map( (item, i) =>{
           return (
-            <Menu.Item key={i} onClick={() => maj(item[proprety])} >
-              <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-              >
-                <span>
-                  {item[name]}
-                </span>
-                {item.img &&
-                  <span className="drapeau">
-                    <img className="logos" src={ item.img } />
-                  </span>
-                }
-              </div>
+            <Menu.Item 
+            style={
+              {backgroundColor: selected === item[proprety] ? COLOR_CERAMIC : COLOR_SLATE }
+            }
+            key={i} onClick={() => maj(item[proprety])} 
+            >
+
+                <MenuItem
+                item={item}
+                name={name}
+                styleIn={menuItemInStyle}
+                styleOut={menuItemOutStyle}
+                />
+
             </Menu.Item>
           )
         })}

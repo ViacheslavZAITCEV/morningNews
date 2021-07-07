@@ -8,14 +8,16 @@ const dropdownOutStyle= {
   color: '#fff',
   borderRadius: 15,
   margin: 15,
+  height: 35,
 }
 
 const dropdownInStyle= {
   background: COLOR_SLATE,
   color: COLOR_COFFEE,
   borderRadius: 15,
-  borderColor: COLOR_COFFEE,
+  borderColor: COLOR_LATTE,
   margin: 15,
+  height: 35,
 }
 
 export default function DropDownButton(props) {
@@ -25,7 +27,7 @@ export default function DropDownButton(props) {
   const [dropdownStyle, setdropdownStyle] = useState(dropdownOutStyle)
 
   return (    
-    <Dropdown overlay={dropdown} >
+    <Dropdown overlay={dropdown} selected={titleItem} >
       <Button 
       style={dropdownStyle}
       onMouseEnter={ ()=> setdropdownStyle(dropdownInStyle) }
