@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Dropdown, Button } from 'antd';
+import { Dropdown, Button, Col, Row } from 'antd';
 
 import { COLOR_SLATE, COLOR_LATTE, COLOR_COFFEE } from '../constants'
 
@@ -33,12 +33,15 @@ export default function DropDownButton(props) {
       onMouseEnter={ ()=> setdropdownStyle(dropdownInStyle) }
       onMouseLeave={ ()=> setdropdownStyle(dropdownOutStyle) }
       >
-        {title} - {titleItem ? titleItem : <span> All </span>} &nbsp;
+        <Row xs={1} sm={3}>
         {image && 
           <img className="logos" alt={title}
           src={ titleItem ? `/images/${titleItem}.png` : `/images/${image}.png` }
           />
         }
+        {titleItem ? titleItem : <span> All </span>} &nbsp;
+        {title}
+        </Row>
       </Button>
     </Dropdown>
   )

@@ -2,7 +2,7 @@ import React from 'react';
 import Links from './Links'
 import {Link} from 'react-router-dom'
 import '../App.css';
-import { Menu, Row, Col } from 'antd'
+import { Row, Col } from 'antd'
 import DropDownButton from '../components/DropDownButton'
 import { connect } from 'react-redux';
 

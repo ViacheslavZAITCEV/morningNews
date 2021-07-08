@@ -12,7 +12,7 @@ const dropMenuStyle = {
   backgroundColor: COLOR_SLATE,
   color: '#fff',
   // margin: 10,
-
+  
 }
 
 
@@ -47,7 +47,7 @@ const DropdownMenu = (props)=>{
           return (
             <Menu.Item 
             style={
-              {backgroundColor: selected === item[proprety] ? COLOR_CERAMIC : COLOR_SLATE }
+              {borderRadius: 15, backgroundColor: selected === item[proprety] ? COLOR_CERAMIC : COLOR_SLATE }
             }
             key={i} onClick={() => maj(item[proprety])} 
             >

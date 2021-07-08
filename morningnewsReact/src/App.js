@@ -10,13 +10,12 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 import user from './reduceurs/user.reduceur';
-// import artLikes from './reduceurs/artLikes.reduceur';
 
 
-// const store = createStore(combineReducers({user, artLikes}));
 const store = createStore(combineReducers({user}));
 
 function App() {
+  document.title = 'Coffee & News'
   return (
     <>
     <Provider store={store}>
