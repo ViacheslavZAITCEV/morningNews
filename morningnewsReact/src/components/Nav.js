@@ -76,7 +76,10 @@ function Nav(props) {
             title='Language ' 
             titleItem={lang} 
             dropdown={menuLang}
-            /> 
+            />
+            <div>
+              Language
+            </div>
           </span>
         }
 

@@ -33,15 +33,15 @@ export default function DropDownButton(props) {
       onMouseEnter={ ()=> setdropdownStyle(dropdownInStyle) }
       onMouseLeave={ ()=> setdropdownStyle(dropdownOutStyle) }
       >
-        <Row xs={1} sm={3}>
+        <Col span={5}>
         {image && 
           <img className="logos" alt={title}
           src={ titleItem ? `/images/${titleItem}.png` : `/images/${image}.png` }
           />
         }
         {titleItem ? titleItem : <span> All </span>} &nbsp;
-        {title}
-        </Row>
+        {/* {title} */}
+        </Col>
       </Button>
     </Dropdown>
   )
