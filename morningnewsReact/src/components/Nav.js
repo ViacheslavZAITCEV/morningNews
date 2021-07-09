@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import '../App.css';
 import { Row, Col } from 'antd'
 import DropDownButton from '../components/DropDownButton'
+import DropDownButtonCategory from '../components/DropDownButtonCategory'
 import { connect } from 'react-redux';
 
 import { COLOR_SLATE, COLOR_LATTE, COLOR_COFFEE } from '../constants'
@@ -65,36 +66,36 @@ function Nav(props) {
 
         {menuLang && 
           <span key="langMenu" style={dropMenuStyle}>
+            <div>Language</div>
             <DropDownButton 
             title='Language ' 
             titleItem={lang} 
             dropdown={menuLang}
             />
-            <div>Language</div>
           </span>
         }
 
         {menuCountry && 
           <span key="menuCountry" style={dropMenuStyle}>
+            <div>Country's source</div>
             <DropDownButton 
             title="Country's source " 
             titleItem={country} 
             dropdown={menuCountry} 
             image='all' 
             />
-            <div>Country's source</div>
           </span>
         }
         
         {menuCategory && 
           <span key="menuCategory" style={dropMenuStyle}>
-            <DropDownButton 
+            <div>Category</div>
+            <DropDownButtonCategory 
             title="Category " 
             titleItem={category} 
             dropdown={menuCategory} 
             image='allCategorys'
             />
-            <div>Category</div>
           </span>
         }
             <Links to="/screenmyarticles"  styleOut={linkOutStyle} styleIn={linkInStyle} >

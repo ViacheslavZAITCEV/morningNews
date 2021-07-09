@@ -206,7 +206,7 @@ router.post ('/fetch', async function (req, res, next){
 
   } catch (error) {
     console.log(error);
-    response.error= error;    
+    response.error= error.statusCode;    
   }
   
   // console.log('response=', response);

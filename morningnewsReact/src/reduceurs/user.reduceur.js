@@ -1,10 +1,11 @@
-export default function (user = {
-    token : "vide",
-    lang: '',
-    country : '',
-    category : '',
-    news : [],
-}, action){
+export default function (
+    user = {
+        token : "vide",
+        lang: 'All',
+        country : 'All',
+        category : 'All',
+        news : [],
+    }, action){
     var newUser;
     var wishList = [];
     // console.log('user.reduceur, action.type=', action.type);
@@ -20,9 +21,9 @@ export default function (user = {
     } else if(action.type ==='initialisation'){
         newUser = {
             token : "vide",
-            lang: '',
-            country : '',
-            category : '',
+            lang: 'All',
+            country : 'All',
+            category : 'All',
             news : [],
         };
         return newUser;

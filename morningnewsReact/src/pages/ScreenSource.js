@@ -42,9 +42,9 @@ function ScreenSource(props) {
   }
 
 
-  const [lang, setLang] = useState(languages?.[0].language);
-  const [country, setCountry] = useState(countrys?.[0].country);
-  const [category, setCategory] = useState(categorys?.[0].category);
+  const [lang, setLang] = useState(props.lang);
+  const [country, setCountry] = useState(props.country);
+  const [category, setCategory] = useState(props.category);
   const [sourceList, setSourceList] = useState([]);
   
   useEffect(()=>{
@@ -224,16 +224,17 @@ function ScreenSource(props) {
       // state.artLikes = state.user.news;
       return {
         token : state.user.token,
-        lang : state.user.lang !== 'language=undefined&' ? state.user.lang : '', 
-        country : state.user.country !== 'country=undefined&' ? state.user.country : '', 
-        category : state.user.category !== 'category=undefined&' ? state.user.category : '',
+        lang : state.user.lang !== 'language=undefined&' ? state.user.lang : 'All', 
+        country : state.user.country !== 'country=undefined&' ? state.user.country : 'All', 
+        category : state.user.category !== 'category=undefined&' ? state.user.category : 'All',
          }
     }else{
       return {
         token : 'vide',
-        lang : '',
-        country : '',
-        category : ''
+        lang: 'All',
+        country : 'All',
+        category : 'All',
+        news : [],
       }
     }
   }
