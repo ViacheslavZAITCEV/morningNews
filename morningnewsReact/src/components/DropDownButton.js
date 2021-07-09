@@ -36,10 +36,10 @@ export default function DropDownButton(props) {
         <Col span={5}>
         {image && 
           <img className="logos" alt={title}
-          src={ titleItem ? `/images/${titleItem}.png` : `/images/${image}.png` }
+          src={ titleItem !== '' || titleItem !== 'All' ? `/images/${titleItem}.png` : `/images/${image}.png` }
           />
         }
-        &nbsp; {titleItem ? titleItem : <span> All </span>} &nbsp;
+        &nbsp; { titleItem !=='allCategorys' ? titleItem : <span> All </span>} &nbsp;
         {/* {title} */}
         </Col>
       </Button>

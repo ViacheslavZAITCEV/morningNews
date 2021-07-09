@@ -42,9 +42,9 @@ function ScreenSource(props) {
   }
 
 
-  const [lang, setLang] = useState(props.lang);
-  const [country, setCountry] = useState(props.country);
-  const [category, setCategory] = useState(props.category);
+  const [lang, setLang] = useState(languages?.[0].language);
+  const [country, setCountry] = useState(countrys?.[0].country);
+  const [category, setCategory] = useState(categorys?.[0].category);
   const [sourceList, setSourceList] = useState([]);
   
   useEffect(()=>{
@@ -62,7 +62,6 @@ function ScreenSource(props) {
     var fromFront=JSON.stringify(toBack);
 
     try {
-      console.log('etape1');
       var requet = {
         method: 'POST',
         headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
@@ -110,6 +109,9 @@ function ScreenSource(props) {
     setCountry(country);
     setCategory(category);
     chargeNews(lang, country, category);
+    console.log('lang: ' + lang)
+    console.log('country: ' + country)
+    console.log('category: ' + category)
   }
 
 

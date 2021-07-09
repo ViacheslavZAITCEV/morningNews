@@ -75,7 +75,7 @@ export const countrys = [
 
 export const categorys = [
   {
-    category: 'All',
+    category: 'allCategorys',
     categoryName: 'All categorys',
     img: '/images/allCategorys.png',
   },

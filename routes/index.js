@@ -187,7 +187,7 @@ router.post ('/fetch', async function (req, res, next){
     fromFront.country = 'country=' + fromFront.country + '&'
   }
   
-  if (fromFront.category === 'All') {
+  if (fromFront.category === 'allCategorys') {
     fromFront.category = ''
   }else{
     fromFront.category = 'category=' + fromFront.category + '&'

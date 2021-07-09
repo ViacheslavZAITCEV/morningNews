@@ -37,7 +37,6 @@ const DropdownMenu = (props)=>{
     color: '#fff',
     // margin: 10,
   }  
-  console.log('selected=', selected)
 
     return (
       <Menu
