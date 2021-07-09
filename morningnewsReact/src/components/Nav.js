@@ -45,18 +45,11 @@ function Nav(props) {
     color: COLOR_LATTE,
   }
   
-  const dropMenuStyle = { 
-    paddingRight: 7,
-    paddingLeft: 7, 
-    paddingBottom: 0,
-    paddingTop: 0,  
-    margin: 0,
-    border : 2,
-    borderRadius : 15,
-    color: COLOR_COFFEE,
-    "&:hover":{
-      background: '#fff',
-    }
+  const dropMenuStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    color: '#fff',
   }
 
 
@@ -77,9 +70,7 @@ function Nav(props) {
             titleItem={lang} 
             dropdown={menuLang}
             />
-            <div>
-              Language
-            </div>
+            <div>Language</div>
           </span>
         }
 
@@ -91,6 +82,7 @@ function Nav(props) {
             dropdown={menuCountry} 
             image='all' 
             />
+            <div>Country's source</div>
           </span>
         }
         
@@ -102,6 +94,7 @@ function Nav(props) {
             dropdown={menuCategory} 
             image='allCategorys'
             />
+            <div>Category</div>
           </span>
         }
             <Links to="/screenmyarticles"  styleOut={linkOutStyle} styleIn={linkInStyle} >
