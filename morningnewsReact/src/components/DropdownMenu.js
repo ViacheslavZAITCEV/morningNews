@@ -45,9 +45,10 @@ const DropdownMenu = (props)=>{
         { list.map( (item, i) =>{
           return (
             <Menu.Item 
-            style={
-              {borderRadius: 15, backgroundColor: selected === item[proprety] ? COLOR_CERAMIC : COLOR_SLATE }
-            }
+            style={{
+              borderRadius: 15, 
+              backgroundColor: selected === item[proprety] ? COLOR_CERAMIC : COLOR_SLATE 
+            }}
             key={i} onClick={() => maj(item[proprety])} 
             >
 

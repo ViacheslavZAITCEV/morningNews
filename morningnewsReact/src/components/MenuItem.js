@@ -12,14 +12,14 @@ function MenuItem(props) {
     onMouseEnter={ ()=> setStyle(styleIn) }
     onMouseLeave={ ()=> setStyle(styleOut) }
     >
-      <span style={{weight: 100}}>
-        {item[name]}
-      </span>
       {item.img &&
         <span className="drapeau">
           <img className="logos" src={ item.img } />
-      </span>
+        </span>
       }
+      <span style={{weight: 100}}>
+        {item[name]}
+      </span>
     </span>
   )
 }
