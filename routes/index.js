@@ -236,23 +236,23 @@ router.post ('/getArticles', async function (req,res,next){
   res.json(response)
 })
 
-router.post('/getArticles', async function(req, res, next){
-  console.log('route: fetch,  req.body=', req.body);
-  var urlBrut = req.body;
-  var url = JSON.parse(urlBrut);
-  console.log('route: fetch,  url=', url);
-  var reponse= {status : false};
-  try {
-    reponse.reponse = await fetch(`${url.url}${url.lang}${url.country}${url.category}apiKey=${apiKey}`);
+// router.post('/getArticles', async function(req, res, next){
+//   console.log('route: fetch,  req.body=', req.body);
+//   var urlBrut = req.body;
+//   var url = JSON.parse(urlBrut);
+//   console.log('route: fetch,  url=', url);
+//   var reponse= {status : false};
+//   try {
+//     reponse.reponse = await fetch(`${url.url}${url.lang}${url.country}${url.category}apiKey=${apiKey}`);
 
-    reponse.status = true;
-  } catch (error) {
-    console.log(error);
-    reponse.error = error; 
-  }
-  console.log ('fetch. reponseBD=', reponse);
-  res.json(reponse)
-})
+//     reponse.status = true;
+//   } catch (error) {
+//     console.log(error);
+//     reponse.error = error; 
+//   }
+//   console.log ('fetch. reponseBD=', reponse);
+//   res.json(reponse)
+// })
 
 
 
@@ -296,8 +296,8 @@ async function createUser(email, pass){
 
 
 async function setLang(token, lang){
-  console.log('function setLang, lang = ', lang)
-  console.log('function setLang, token = ', token)
+  // console.log('function setLang, lang = ', lang)
+  // console.log('function setLang, token = ', token)
   var reponse = await users.update({token}, {lang});
   return reponse;
 }
