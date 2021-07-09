@@ -40,7 +40,6 @@ export default function DropDownButton(props) {
           />
         }
         &nbsp; { titleItem !=='allCategorys' ? titleItem : <span> All </span>} &nbsp;
-        {/* {title} */}
         </Col>
       </Button>
     </Dropdown>
