@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import '../App.css';
+import { chargeNews, updateBD } from '../services/fetchsBackend'
 import { connect } from 'react-redux';
 import { List, Avatar, Col } from 'antd';
 import Nav from '../components/Nav'
@@ -48,60 +49,9 @@ function ScreenSource(props) {
   const [sourceList, setSourceList] = useState([]);
   
   useEffect(()=>{
-    chargeNews( lang, country, category );
+    chargeNews( lang, country, category, setSourceList );
   }, [lang, country, category]);
   
-  async function chargeNews(lang, country, category){
-
-    var toBack = {
-      url : 'https://newsapi.org/v2/sources?',
-      lang : lang,
-      country : country,
-      category : category,
-    }
-    var fromFront=JSON.stringify(toBack);
-
-    try {
-      var requet = {
-        method: 'POST',
-        headers : {'Content-Type' : 'application/x-www-form-urlencoded'},
-        body : `fromFront=${fromFront}`
-      }
-      const data = await fetch('/fetch', requet);
-      const body = await data.json();
-
-      if( body.status ){
-        setSourceList(body.response);
-      }else{
-        console.log('error! retour BackEnd=', body.error);
-      }
-      
-    } catch (error) {
-      console.error('error! catch=', error);
-      
-    }
-  }
-  
-  
-  
-  async function updateBD(route, arg){
-    var body = `${arg}token=${props.token}`
-    var requet = {
-      method : 'POST', 
-      headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body : body
-    };
-    
-    try {
-      await fetch(route, requet);
-    } catch (error) {
-      console.log(error);      
-    }
-  }
-
-
-
-
 
   // mis à jour les états les Reduxs
   function misajour(lang, country, category){
@@ -118,21 +68,21 @@ function ScreenSource(props) {
   async function majLang(lang){
     misajour(lang, country, category);
     props.setLang(lang);
-    updateBD('/setLang', lang);    
+    updateBD('/setLang', lang, props.token);    
   }    
 
 
   function majCountry(country){
     misajour(lang, country, category);
     props.setCountry(country);
-    updateBD('/setCountry', country);
+    updateBD('/setCountry', country, props.token);
   } 
 
 
   function majCategory(category){
     misajour(lang, country, category);
     props.setCategory(category);
-    updateBD('/setCategory', category);
+    updateBD('/setCategory', category, props.token);
   }
 
 
