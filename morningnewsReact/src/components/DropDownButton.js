@@ -38,7 +38,7 @@ export default function DropDownButton(props) {
           src={`/images/${titleItem}.png`}
           />
         }
-        &nbsp; { titleItem !=='allCategorys' ? titleItem : <span> All </span>} &nbsp;
+        &nbsp; {titleItem} &nbsp;
       </Button>
     </Dropdown>
   )
