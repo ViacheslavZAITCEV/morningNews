@@ -3,7 +3,7 @@ export default function (
         token : "vide",
         lang: 'All',
         country : 'All',
-        category : 'All',
+        category : 'allCategorys',
         news : [],
     }, action){
     var newUser;
@@ -23,7 +23,7 @@ export default function (
             token : "vide",
             lang: 'All',
             country : 'All',
-            category : 'All',
+            category : 'allCategorys',
             news : [],
         };
         return newUser;
