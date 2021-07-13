@@ -82,7 +82,7 @@ function Nav(props) {
             title="Country's source " 
             titleItem={country} 
             dropdown={menuCountry} 
-            image='all' 
+            image='/images/all.png' 
             />
           </span>
         }

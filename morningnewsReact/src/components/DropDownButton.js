@@ -35,7 +35,7 @@ export default function DropDownButton(props) {
       >
         {image && 
           <img className="logos" alt={title}
-          src={`/images/${titleItem}.png`}
+          src={image}
           />
         }
         &nbsp; {titleItem} &nbsp;
